@@ -1,4 +1,3 @@
-[profileREADME.md](https://github.com/user-attachments/files/31892896/profileREADME.md)
 # Hi there! 👋 I'm Abenezer Bekele
 
 **Builder of data dashboards and single-file web apps — turning data into things people can actually use.**
