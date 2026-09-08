@@ -14,7 +14,6 @@
   --rule: #cbd1cc;
   --rule-soft: #dbe0da;
   --accent: #b3341e;
-  --accent-soft: #f0ded9;
   --on-accent: #ffffff;
   --tapeout: #b3341e;
   --launch: #2c6e63;
@@ -23,6 +22,7 @@
   --chart-weak: #c8cfc9;
   --chart-strong: #3b4644;
   --focus: #4b3fa0;
+  --sticky-bg: rgba(230, 233, 228, 0.94);
   --sans: "IBM Plex Sans", ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
   --mono: "IBM Plex Mono", ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
   --serif: "Source Serif 4", Georgia, "Times New Roman", serif;
@@ -39,7 +39,6 @@
     --rule: #2f3739;
     --rule-soft: #262d2f;
     --accent: #e4664a;
-    --accent-soft: #3a231e;
     --on-accent: #16110f;
     --tapeout: #e4664a;
     --launch: #56ad9c;
@@ -48,6 +47,7 @@
     --chart-weak: #39423f;
     --chart-strong: #aeb8b3;
     --focus: #9184e8;
+    --sticky-bg: rgba(20, 24, 26, 0.94);
   }
 }
 
@@ -61,7 +61,6 @@
   --rule: #2f3739;
   --rule-soft: #262d2f;
   --accent: #e4664a;
-  --accent-soft: #3a231e;
   --on-accent: #16110f;
   --tapeout: #e4664a;
   --launch: #56ad9c;
@@ -70,6 +69,7 @@
   --chart-weak: #39423f;
   --chart-strong: #aeb8b3;
   --focus: #9184e8;
+  --sticky-bg: rgba(20, 24, 26, 0.94);
 }
 
 * { box-sizing: border-box; }
@@ -87,136 +87,101 @@ body {
 h1, h2, h3 { margin: 0; font-weight: 600; letter-spacing: -0.011em; text-wrap: balance; }
 p { margin: 0; }
 a { color: var(--accent); }
+:focus-visible { outline: 2px solid var(--focus); outline-offset: 2px; border-radius: 2px; }
 
-:focus-visible {
-  outline: 2px solid var(--focus);
-  outline-offset: 2px;
-  border-radius: 2px;
-}
-
-.wrap { max-width: 1120px; margin: 0 auto; padding: 0 28px; }
+.wrap { max-width: 1140px; margin: 0 auto; padding: 0 28px; }
 
 /* ── masthead ─────────────────────────────────────────── */
-.masthead { padding: 40px 0 26px; }
+.masthead { padding: 38px 0 24px; }
 .brand { display: flex; align-items: baseline; gap: 12px; flex-wrap: wrap; }
 .brand h1 { font-size: 21px; }
 .brand .rev {
-  font-family: var(--mono);
-  font-size: 11px;
-  color: var(--muted);
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
+  font-family: var(--mono); font-size: 11px; color: var(--muted);
+  letter-spacing: 0.06em; text-transform: uppercase;
 }
 .lede { margin-top: 8px; color: var(--muted); max-width: 62ch; }
 
-.console {
-  margin-top: 22px;
-  display: grid;
-  grid-template-columns: 1fr auto auto;
-  gap: 8px;
-  align-items: stretch;
-  max-width: 680px;
-}
+.console { margin-top: 20px; display: flex; gap: 8px; flex-wrap: wrap; max-width: 700px; }
+.field { position: relative; flex: 1 1 260px; min-width: 0; display: flex; }
 .console input {
   font: 400 15px/1.4 var(--sans);
-  color: var(--ink);
-  background: var(--panel);
-  border: 1px solid var(--rule);
-  border-radius: 3px;
-  padding: 11px 13px;
-  min-width: 0;
+  color: var(--ink); background: var(--panel);
+  border: 1px solid var(--rule); border-radius: 3px;
+  padding: 11px 42px 11px 13px; width: 100%; min-width: 0;
 }
 .console input::placeholder { color: var(--muted); opacity: 0.8; }
 .console input:focus { border-color: var(--focus); outline: none; }
+kbd {
+  position: absolute; right: 9px; top: 50%; transform: translateY(-50%);
+  font-family: var(--mono); font-size: 10.5px; color: var(--muted);
+  border: 1px solid var(--rule); border-radius: 3px; padding: 1px 5px; pointer-events: none;
+}
+input:focus + kbd, input:not(:placeholder-shown) + kbd { opacity: 0; }
 
 button {
-  font: 500 14px/1 var(--sans);
-  color: var(--ink);
-  background: var(--panel);
-  border: 1px solid var(--rule);
-  border-radius: 3px;
-  padding: 0 16px;
-  min-height: 42px;
-  cursor: pointer;
-  white-space: nowrap;
+  font: 500 14px/1 var(--sans); color: var(--ink); background: var(--panel);
+  border: 1px solid var(--rule); border-radius: 3px;
+  padding: 0 16px; min-height: 42px; cursor: pointer; white-space: nowrap;
 }
 button:hover:not(:disabled) { border-color: var(--ink-2); }
 button:disabled { opacity: 0.45; cursor: default; }
-button.go {
-  background: var(--accent);
-  border-color: var(--accent);
-  color: var(--on-accent);
-  font-weight: 600;
-}
+button.go { background: var(--accent); border-color: var(--accent); color: var(--on-accent); font-weight: 600; }
 button.go:hover:not(:disabled) { filter: brightness(1.08); }
+button.mini { min-height: 30px; padding: 0 10px; font-family: var(--mono); font-size: 12px; color: var(--muted); }
 
-.examples { display: flex; flex-wrap: wrap; gap: 6px; align-items: center; margin-top: 12px; }
-.examples .k {
-  font-family: var(--mono);
-  font-size: 11px;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  color: var(--muted);
-  margin-right: 4px;
+.recents { display: flex; flex-wrap: wrap; gap: 6px; align-items: center; margin-top: 11px; }
+.recents .k {
+  font-family: var(--mono); font-size: 11px; letter-spacing: 0.08em;
+  text-transform: uppercase; color: var(--muted); margin-right: 3px;
 }
-.examples button {
-  min-height: 28px;
-  padding: 0 10px;
-  font-family: var(--mono);
-  font-size: 12px;
-  color: var(--muted);
-  background: transparent;
-  border-color: var(--rule-soft);
-}
+.recents button { background: transparent; border-color: var(--rule-soft); }
 
-/* ── provenance bar ───────────────────────────────────── */
+/* ── provenance ───────────────────────────────────────── */
 .provenance {
-  margin-top: 24px;
-  display: flex;
-  gap: 12px;
-  align-items: flex-start;
-  padding: 12px 14px;
-  border: 1px solid var(--rule);
-  border-left: 3px solid var(--accent);
-  border-radius: 3px;
-  background: var(--panel);
-  font-size: 13.5px;
-  color: var(--ink-2);
-  max-width: 78ch;
+  margin-top: 20px; display: flex; gap: 12px; align-items: flex-start;
+  padding: 12px 14px; border: 1px solid var(--rule); border-left: 3px solid var(--accent);
+  border-radius: 3px; background: var(--panel);
+  font-size: 13.5px; color: var(--ink-2); max-width: 80ch;
 }
 .provenance b { font-weight: 600; color: var(--ink); }
-
 .flag {
-  display: inline-flex;
-  align-items: center;
-  align-self: flex-start;
-  flex: 0 0 auto;
-  white-space: nowrap;
-  gap: 6px;
-  font-family: var(--mono);
-  font-size: 11px;
-  letter-spacing: 0.07em;
-  text-transform: uppercase;
-  color: var(--accent);
-  border: 1px solid var(--accent);
-  border-radius: 2px;
-  padding: 2px 7px;
+  display: inline-flex; align-items: center; align-self: flex-start; flex: 0 0 auto;
+  white-space: nowrap; font-family: var(--mono); font-size: 11px;
+  letter-spacing: 0.07em; text-transform: uppercase; color: var(--accent);
+  border: 1px solid var(--accent); border-radius: 2px; padding: 2px 7px;
 }
 
+/* ── sticky section nav ───────────────────────────────── */
+.railnav {
+  position: sticky; top: 0; z-index: 20;
+  background: var(--sticky-bg);
+  -webkit-backdrop-filter: blur(8px); backdrop-filter: blur(8px);
+  border-bottom: 1px solid var(--rule);
+  margin-top: 26px;
+}
+.railnav ol {
+  list-style: none; margin: 0 auto; padding: 0 28px; max-width: 1140px;
+  display: flex; gap: 2px; overflow-x: auto; scrollbar-width: none;
+}
+.railnav ol::-webkit-scrollbar { display: none; }
+.railnav a {
+  display: inline-flex; align-items: baseline; gap: 7px;
+  padding: 12px 12px; text-decoration: none;
+  font-family: var(--mono); font-size: 11.5px; letter-spacing: 0.06em;
+  text-transform: uppercase; color: var(--muted);
+  border-bottom: 2px solid transparent; white-space: nowrap;
+}
+.railnav a:hover { color: var(--ink); }
+.railnav a[aria-current="true"] { color: var(--ink); border-bottom-color: var(--accent); }
+.railnav a .n { color: var(--accent); }
+
 /* ── section furniture ────────────────────────────────── */
-.sec { padding: 34px 0 0; }
-.sec + .sec { border-top: 1px solid var(--rule-soft); margin-top: 34px; }
+.sec { padding: 36px 0 0; scroll-margin-top: 58px; }
+.sec + .sec { border-top: 1px solid var(--rule-soft); margin-top: 36px; }
 .eyebrow {
-  font-family: var(--mono);
-  font-size: 11px;
-  font-weight: 500;
-  letter-spacing: 0.11em;
-  text-transform: uppercase;
-  color: var(--muted);
-  display: flex;
-  align-items: baseline;
-  gap: 10px;
-  margin-bottom: 16px;
+  font-family: var(--mono); font-size: 11px; font-weight: 500;
+  letter-spacing: 0.11em; text-transform: uppercase; color: var(--muted);
+  display: flex; align-items: baseline; gap: 10px; margin-bottom: 16px; flex-wrap: wrap;
 }
 .eyebrow .n { color: var(--accent); }
 .eyebrow .hint { text-transform: none; letter-spacing: 0.02em; font-size: 11.5px; opacity: 0.9; }
@@ -225,165 +190,92 @@ button.go:hover:not(:disabled) { filter: brightness(1.08); }
 
 /* ── company header ───────────────────────────────────── */
 .co { display: flex; flex-wrap: wrap; gap: 20px 40px; align-items: flex-start; justify-content: space-between; }
-.co h2 { font-size: 30px; letter-spacing: -0.02em; }
-.co .tick {
-  font-family: var(--mono);
-  font-size: 12px;
-  font-weight: 500;
-  color: var(--muted);
-  margin-left: 10px;
-  letter-spacing: 0.04em;
-}
+.co h2 { font-size: 31px; letter-spacing: -0.02em; }
+.co .tick { font-family: var(--mono); font-size: 12px; font-weight: 500; color: var(--muted); margin-left: 10px; letter-spacing: 0.04em; }
 .co .segs { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 12px; }
-.seg {
-  font-family: var(--mono);
-  font-size: 11.5px;
-  color: var(--muted);
-  border: 1px solid var(--rule);
-  border-radius: 2px;
-  padding: 2px 8px;
-}
-.vitals { display: grid; grid-template-columns: repeat(3, minmax(110px, auto)); gap: 4px 30px; }
-.vitals dt {
-  font-family: var(--mono);
-  font-size: 10.5px;
-  letter-spacing: 0.09em;
-  text-transform: uppercase;
-  color: var(--muted);
-}
+.seg { font-family: var(--mono); font-size: 11.5px; color: var(--muted); border: 1px solid var(--rule); border-radius: 2px; padding: 2px 8px; }
+.coacts { display: flex; gap: 8px; flex-wrap: wrap; align-items: center; }
+.vitals { display: grid; grid-template-columns: repeat(3, minmax(104px, auto)); gap: 4px 28px; }
+.vitals dt { font-family: var(--mono); font-size: 10.5px; letter-spacing: 0.09em; text-transform: uppercase; color: var(--muted); }
 .vitals dd { margin: 2px 0 0; font-size: 14.5px; font-weight: 500; }
+
+/* ── the call sheet ───────────────────────────────────── */
+.callsheet {
+  margin-top: 22px; display: grid; grid-template-columns: 1.15fr 1fr 1fr;
+  border: 1px solid var(--rule); border-radius: 3px; background: var(--panel); overflow: hidden;
+}
+.cell { padding: 16px 18px 17px; border-left: 1px solid var(--rule-soft); display: flex; flex-direction: column; gap: 4px; }
+.cell:first-child { border-left: none; }
+.cell .k { font-family: var(--mono); font-size: 10px; letter-spacing: 0.11em; text-transform: uppercase; color: var(--muted); }
+.figure { display: flex; align-items: baseline; gap: 7px; margin-top: 2px; }
+.figure .num { font-family: var(--mono); font-size: 33px; font-weight: 600; line-height: 1; letter-spacing: -0.02em; font-variant-numeric: tabular-nums; }
+.figure .unit { font-family: var(--mono); font-size: 12px; color: var(--muted); }
+.cell .lead { font-size: 14.5px; font-weight: 500; line-height: 1.32; }
+.cell .sub { font-size: 13px; color: var(--muted); line-height: 1.35; }
+.cell .prod { font-family: var(--mono); font-size: 21px; font-weight: 600; letter-spacing: -0.01em; line-height: 1.1; margin-top: 2px; }
+.bars { display: flex; gap: 3px; margin-top: 6px; }
+.bars i { height: 5px; flex: 1; border-radius: 1px; background: var(--rule); }
+.bars i.on { background: var(--accent); }
 
 /* ── signals ──────────────────────────────────────────── */
 .signals { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 14px; }
-.sig { display: flex; flex-direction: column; padding: 18px 18px 16px; border-top: 3px solid var(--tapeout); }
+.sig { display: flex; flex-direction: column; padding: 17px 18px 16px; border-top: 3px solid var(--tapeout); position: relative; }
 .sig-top { display: flex; align-items: baseline; justify-content: space-between; gap: 10px; }
 .sig-prod { font-family: var(--mono); font-size: 12.5px; font-weight: 600; letter-spacing: 0.04em; }
 .sig-when { font-family: var(--mono); font-size: 11.5px; color: var(--muted); }
 .sig h3 { font-size: 15.5px; line-height: 1.35; margin-top: 11px; }
 .sig .means { margin-top: 8px; font-size: 13.5px; color: var(--muted); }
-.say {
-  margin-top: 14px;
-  padding: 11px 12px;
-  background: var(--panel-2);
-  border-radius: 2px;
-  font-family: var(--serif);
-  font-size: 14.5px;
-  line-height: 1.45;
+.tag {
+  position: absolute; top: -3px; right: 14px;
+  font-family: var(--mono); font-size: 9.5px; letter-spacing: 0.11em; text-transform: uppercase;
+  color: var(--on-accent); background: var(--accent); padding: 2px 7px; border-radius: 0 0 2px 2px;
 }
-.say .k {
-  display: block;
-  font-family: var(--mono);
-  font-size: 10px;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  color: var(--muted);
-  margin-bottom: 5px;
-}
-.srcline {
-  margin-top: auto;
-  padding-top: 14px;
-  display: flex;
-  align-items: baseline;
-  justify-content: space-between;
-  gap: 10px;
-  font-family: var(--mono);
-  font-size: 11.5px;
-  color: var(--muted);
-}
+.say { margin-top: 14px; padding: 11px 12px; background: var(--panel-2); border-radius: 2px; font-family: var(--serif); font-size: 14.5px; line-height: 1.45; }
+.say .k { display: block; font-family: var(--mono); font-size: 10px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); margin-bottom: 5px; }
+.srcline { margin-top: auto; padding-top: 14px; display: flex; align-items: baseline; justify-content: space-between; gap: 10px; font-family: var(--mono); font-size: 11.5px; color: var(--muted); }
 .srcline .src { overflow-wrap: anywhere; }
 .verify { color: var(--accent); text-decoration: none; border-bottom: 1px solid currentColor; white-space: nowrap; }
 .conf { font-family: var(--mono); font-size: 10px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); border: 1px solid var(--rule); border-radius: 2px; padding: 1px 5px; }
 
 /* ── outreach ─────────────────────────────────────────── */
-.tabs { display: flex; gap: 0; border-bottom: 1px solid var(--rule); }
-.tabs button {
-  border: none;
-  border-bottom: 2px solid transparent;
-  border-radius: 0;
-  background: none;
-  color: var(--muted);
-  padding: 12px 16px;
-  min-height: 0;
-  font-weight: 500;
-}
+.tabs { display: flex; border-bottom: 1px solid var(--rule); overflow-x: auto; scrollbar-width: none; }
+.tabs::-webkit-scrollbar { display: none; }
+.tabs button { border: none; border-bottom: 2px solid transparent; border-radius: 0; background: none; color: var(--muted); padding: 12px 16px; min-height: 0; font-weight: 500; }
 .tabs button[aria-selected="true"] { color: var(--ink); border-bottom-color: var(--accent); }
 .mailbody { padding: 20px 22px 22px; }
 .angle { font-size: 13.5px; color: var(--muted); }
-.subj {
-  margin-top: 14px;
-  display: flex;
-  gap: 12px;
-  align-items: baseline;
-  padding: 11px 13px;
-  background: var(--panel-2);
-  border-radius: 2px;
-}
-.subj .k { font-family: var(--mono); font-size: 10px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); }
+.basedon { margin-top: 11px; font-family: var(--mono); font-size: 11.5px; color: var(--muted); display: flex; gap: 8px; align-items: baseline; flex-wrap: wrap; }
+.basedon .k { color: var(--accent); letter-spacing: 0.08em; text-transform: uppercase; font-size: 10px; }
+.subj { margin-top: 14px; display: flex; gap: 12px; align-items: baseline; padding: 11px 13px; background: var(--panel-2); border-radius: 2px; }
+.subj .k { font-family: var(--mono); font-size: 10px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); flex: 0 0 auto; }
 .subj .v { font-weight: 600; }
 .draft { font-family: var(--serif); font-size: 16px; line-height: 1.6; white-space: pre-wrap; max-width: 62ch; margin-top: 16px; }
 .mailacts { display: flex; gap: 8px; align-items: center; margin-top: 18px; flex-wrap: wrap; }
-.mailacts a {
-  text-decoration: none;
-  color: var(--ink);
-  background: var(--panel);
-  border: 1px solid var(--rule);
-  border-radius: 3px;
-  padding: 0 16px;
-  min-height: 42px;
-  display: inline-flex;
-  align-items: center;
-  font-size: 14px;
-  font-weight: 500;
-}
+.mailacts a { text-decoration: none; color: var(--ink); background: var(--panel); border: 1px solid var(--rule); border-radius: 3px; padding: 0 16px; min-height: 42px; display: inline-flex; align-items: center; font-size: 14px; font-weight: 500; }
 .mailacts a:hover { border-color: var(--ink-2); }
 .said { font-family: var(--mono); font-size: 12px; color: var(--launch); }
-.basedon {
-  margin-top: 12px;
-  font-family: var(--mono);
-  font-size: 11.5px;
-  color: var(--muted);
-  display: flex;
-  gap: 8px;
-  align-items: baseline;
-}
-.basedon .k { color: var(--accent); letter-spacing: 0.08em; text-transform: uppercase; font-size: 10px; }
 
 /* ── silicon calendar ─────────────────────────────────── */
 .calwrap { overflow-x: auto; padding: 6px 0 0; }
-.cal { position: relative; height: 238px; min-width: 780px; margin: 0 8px; }
+.cal { position: relative; height: 238px; min-width: 800px; margin: 0 8px; }
 .cal-axis { position: absolute; left: 0; right: 0; top: 118px; height: 1px; background: var(--rule); }
 .cal-year { position: absolute; top: 112px; bottom: 26px; width: 1px; background: var(--rule-soft); }
-.cal-year span {
-  position: absolute;
-  bottom: -20px;
-  left: 50%;
-  transform: translateX(-50%);
-  font-family: var(--mono);
-  font-size: 11px;
-  color: var(--muted);
-}
+.cal-year span { position: absolute; bottom: -20px; left: 50%; transform: translateX(-50%); font-family: var(--mono); font-size: 11px; color: var(--muted); }
 .cal-now { position: absolute; top: 18px; bottom: 30px; width: 1px; background: var(--accent); }
-.cal-now span {
-  position: absolute;
-  top: -17px;
-  left: 50%;
-  transform: translateX(-50%);
-  font-family: var(--mono);
-  font-size: 10px;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  color: var(--accent);
-  white-space: nowrap;
-}
-.pin { position: absolute; top: 118px; width: 9px; height: 9px; margin: -4.5px 0 0 -4.5px; border-radius: 50%; }
+.cal-now span { position: absolute; top: -17px; left: 50%; transform: translateX(-50%); font-family: var(--mono); font-size: 10px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--accent); white-space: nowrap; }
+.pin { position: absolute; top: 118px; width: 9px; height: 9px; margin: -4.5px 0 0 -4.5px; border-radius: 50%; transition: transform 0.12s ease; }
 .stem { position: absolute; width: 1px; height: 15px; margin-left: -0.5px; background: var(--rule); }
 .stem.up { top: 103px; }
 .stem.down { top: 118px; }
-.mile { position: absolute; width: 168px; }
+.mile { position: absolute; width: 172px; cursor: default; }
 .mile.up { bottom: 135px; }
 .mile.down { top: 135px; }
 .mile .d { font-family: var(--mono); font-size: 11px; font-weight: 500; letter-spacing: 0.03em; }
 .mile .l { font-size: 13px; line-height: 1.3; margin-top: 3px; }
+.mile .away { font-family: var(--mono); font-size: 10.5px; color: var(--muted); margin-top: 3px; opacity: 0; transition: opacity 0.12s ease; }
+.mile:hover .away { opacity: 1; }
+.mile.next .d::after { content: " ▸"; }
+@media (prefers-reduced-motion: reduce) { .pin, .mile .away { transition: none; } }
 .key { display: flex; flex-wrap: wrap; gap: 16px; margin-top: 14px; font-family: var(--mono); font-size: 11.5px; color: var(--muted); }
 .key i { display: inline-block; width: 8px; height: 8px; border-radius: 50%; margin-right: 6px; vertical-align: 1px; }
 
@@ -396,14 +288,17 @@ button.go:hover:not(:disabled) { filter: brightness(1.08); }
 .item .f { margin-top: auto; padding-top: 8px; font-family: var(--mono); font-size: 11px; color: var(--muted); display: flex; justify-content: space-between; gap: 8px; align-items: baseline; }
 
 /* ── charts ───────────────────────────────────────────── */
-.charts { display: grid; grid-template-columns: repeat(auto-fit, minmax(330px, 1fr)); gap: 14px; }
+.charts { display: grid; grid-template-columns: repeat(auto-fit, minmax(340px, 1fr)); gap: 14px; }
 .chart { padding: 18px 18px 12px; }
-.chart-top { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; }
+.chart-top { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; flex-wrap: wrap; }
 .chart-top h3 { font-size: 14.5px; }
 .chart-top .u { font-family: var(--mono); font-size: 11px; color: var(--muted); }
 .chart svg { display: block; width: 100%; height: auto; margin-top: 12px; }
 .chart .tk { font-family: var(--mono); font-size: 10px; fill: var(--muted); }
 .chart .vl { font-family: var(--mono); font-size: 10px; fill: var(--ink-2); }
+.chart .hit { fill: transparent; }
+.chart .hit:hover + .band, .chart g:hover .band { opacity: 0.5; }
+.chart .band { fill: var(--rule-soft); opacity: 0; }
 .chart-key { display: flex; gap: 14px; font-family: var(--mono); font-size: 11px; color: var(--muted); }
 .chart-key i { display: inline-block; width: 8px; height: 8px; border-radius: 1px; margin-right: 5px; }
 
@@ -411,8 +306,9 @@ button.go:hover:not(:disabled) { filter: brightness(1.08); }
 .brief { font-family: var(--serif); font-size: 17px; line-height: 1.62; max-width: 63ch; display: flex; flex-direction: column; gap: 16px; }
 
 /* ── states ───────────────────────────────────────────── */
-.status { display: flex; align-items: center; gap: 10px; font-family: var(--mono); font-size: 13px; color: var(--muted); }
-.status i { width: 7px; height: 7px; border-radius: 50%; background: var(--accent); animation: blink 1.3s ease-in-out infinite; }
+.status { display: flex; align-items: center; gap: 10px; font-family: var(--mono); font-size: 13px; color: var(--muted); flex-wrap: wrap; }
+.status i { width: 7px; height: 7px; border-radius: 50%; background: var(--accent); animation: blink 1.3s ease-in-out infinite; flex: 0 0 auto; }
+.status .el { font-variant-numeric: tabular-nums; }
 @keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0.25; } }
 .sk { background: var(--rule-soft); border-radius: 2px; animation: blink 1.8s ease-in-out infinite; }
 @media (prefers-reduced-motion: reduce) { .status i, .sk { animation: none; } }
@@ -420,35 +316,23 @@ button.go:hover:not(:disabled) { filter: brightness(1.08); }
 .skrow { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 14px; }
 .skcard { padding: 18px; display: flex; flex-direction: column; gap: 10px; }
 
-.alert {
-  padding: 14px 16px;
-  border: 1px solid var(--rule);
-  border-left: 3px solid var(--accent);
-  border-radius: 3px;
-  background: var(--panel);
-  font-size: 14px;
-  color: var(--ink-2);
-  max-width: 78ch;
-}
+.alert { padding: 14px 16px; border: 1px solid var(--rule); border-left: 3px solid var(--accent); border-radius: 3px; background: var(--panel); font-size: 14px; color: var(--ink-2); max-width: 80ch; display: flex; gap: 14px; align-items: center; justify-content: space-between; flex-wrap: wrap; }
 .alert b { color: var(--ink); }
 
-footer {
-  margin-top: 48px;
-  padding: 22px 0 56px;
-  border-top: 1px solid var(--rule-soft);
-  font-family: var(--mono);
-  font-size: 11.5px;
-  color: var(--muted);
-  display: flex;
-  flex-wrap: wrap;
-  gap: 8px 20px;
-  justify-content: space-between;
-}
+footer { margin-top: 46px; padding: 22px 0 56px; border-top: 1px solid var(--rule-soft); font-family: var(--mono); font-size: 11.5px; color: var(--muted); display: flex; flex-wrap: wrap; gap: 8px 20px; justify-content: space-between; }
 
+@media (max-width: 860px) {
+  .callsheet { grid-template-columns: 1fr 1fr; }
+  .cell:nth-child(3) { border-left: none; border-top: 1px solid var(--rule-soft); grid-column: 1 / -1; }
+}
 @media (max-width: 720px) {
   .wrap { padding: 0 18px; }
-  .console { grid-template-columns: 1fr; }
-  .vitals { grid-template-columns: repeat(2, minmax(100px, auto)); }
+  .railnav ol { padding: 0 18px; }
+  .callsheet { grid-template-columns: 1fr; }
+  .cell { border-left: none; border-top: 1px solid var(--rule-soft); }
+  .cell:first-child { border-top: none; }
+  .cell:nth-child(3) { grid-column: auto; }
+  .vitals { grid-template-columns: repeat(2, minmax(96px, auto)); }
   .co h2 { font-size: 25px; }
 }
 </style>
@@ -465,17 +349,15 @@ footer {
     </p>
 
     <form class="console" id="console">
-      <input id="q" placeholder="AMD, Tenstorrent, Infineon…" aria-label="Company name" autocomplete="off">
+      <span class="field">
+        <input id="q" placeholder="AMD, Tenstorrent, Infineon…" aria-label="Company name" autocomplete="off">
+        <kbd>/</kbd>
+      </span>
       <button class="go" type="submit" id="go">Build brief</button>
-      <button type="button" id="again" hidden>Rebuild</button>
+      <button type="button" id="again" hidden>Refresh</button>
+      <button type="button" id="stop" hidden>Stop</button>
     </form>
-    <div class="examples" id="examples">
-      <span class="k">Try</span>
-      <button type="button" data-co="AMD">AMD</button>
-      <button type="button" data-co="Nvidia">Nvidia</button>
-      <button type="button" data-co="Tenstorrent">Tenstorrent</button>
-      <button type="button" data-co="Infineon">Infineon</button>
-    </div>
+    <div class="recents" id="recents"></div>
 
     <div class="provenance">
       <span class="flag">Recall · not research</span>
@@ -486,12 +368,18 @@ footer {
       </span>
     </div>
   </header>
+</div>
 
+<nav class="railnav" id="railnav" hidden aria-label="Sections">
+  <ol id="railnav-list"></ol>
+</nav>
+
+<div class="wrap">
   <main id="app"></main>
 
   <footer>
     <span id="foot-state">Example briefing · fabricated company</span>
-    <span>Built with Claude · no data leaves your account</span>
+    <span>Built with Claude · nothing leaves your account</span>
   </footer>
 </div>
 
@@ -502,14 +390,24 @@ footer {
   var PRODUCTS = ["Calibre", "Tessent", "Veloce", "Questa", "Solido", "Catapult"];
   var TYPES = ["tapeout", "launch", "node", "packaging"];
   var PERSONAS = ["Executive", "Engineering Leader", "Technical Evaluator"];
+  var CONF = ["high", "medium", "low"];
   var TYPE_LABEL = { tapeout: "Tapeout", launch: "Launch", node: "Node transition", packaging: "Packaging" };
   var MONTHS = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+  var PRODUCT_HUE = { Calibre: "tapeout", Tessent: "packaging", Veloce: "launch", Questa: "node", Solido: "node", Catapult: "node" };
   var STAGES = [
     "Recalling recent developments",
     "Pulling reported financials",
     "Laying out the design calendar",
     "Matching signals to products",
     "Drafting outreach"
+  ];
+  var SECTIONS = [
+    { id: "s-signals", n: "01", label: "Signals" },
+    { id: "s-outreach", n: "02", label: "Outreach" },
+    { id: "s-calendar", n: "03", label: "Calendar" },
+    { id: "s-news", n: "04", label: "News" },
+    { id: "s-money", n: "05", label: "Money" },
+    { id: "s-brief", n: "06", label: "Brief" }
   ];
 
   /* ── the example that greets you ─────────────────────── */
@@ -576,8 +474,7 @@ footer {
 
   function buildPrompt(company) {
     return [
-      "You are an account intelligence engine for a Siemens EDA sales team. Produce a briefing on " +
-        company + ".",
+      "You are an account intelligence engine for a Siemens EDA sales team. Produce a briefing on " + company + ".",
       "",
       "YOU CANNOT BROWSE. Everything comes from what you already know, so accuracy is the whole job:",
       "- Only state a fact you actually recall. Never estimate, interpolate or round a number into existence.",
@@ -681,10 +578,15 @@ footer {
         if (!p || !str(x.signal)) return null;
         return {
           signal: str(x.signal), date: str(x.date), source: str(x.source), meaning: str(x.meaning),
-          product: p, confidence: oneOf(x.confidence, ["high", "medium", "low"]) || "",
+          product: p, confidence: oneOf(x.confidence, CONF) || "",
           evidenceLine: str(x.evidenceLine)
         };
-      }).filter(Boolean),
+      }).filter(Boolean).sort(function (a, b) {
+        // Surest first: the rep should read the strongest claim before the weakest.
+        var ai = a.confidence ? CONF.indexOf(a.confidence) : CONF.length;
+        var bi = b.confidence ? CONF.indexOf(b.confidence) : CONF.length;
+        return ai - bi;
+      }),
       article: str(r.article),
       emails: list(r.emails).map(function (x) {
         x = x || {};
@@ -701,13 +603,12 @@ footer {
     return d.signals.length === 0 && d.news.length === 0 && d.financials.quarters.length === 0;
   }
 
-  /* ── rendering helpers ───────────────────────────────── */
+  /* ── helpers ─────────────────────────────────────────── */
   function esc(s) {
     return String(s == null ? "" : s)
       .replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;")
       .replace(/"/g, "&quot;").replace(/'/g, "&#39;");
   }
-  function attr(s) { return esc(s); }
   function verifyUrl(claim, company) {
     return "https://www.google.com/search?q=" + encodeURIComponent(company + " " + claim);
   }
@@ -721,44 +622,114 @@ footer {
     var p = d.split("-");
     return MONTHS[Number(p[1]) - 1] + " " + p[0];
   }
-  function sec(n, title, hint, inner) {
-    return '<section class="sec"><div class="eyebrow"><span class="n">' + esc(n) + "</span><span>" +
-      esc(title) + "</span>" + (hint ? '<span class="hint">' + esc(hint) + "</span>" : "") +
-      "</div>" + inner + "</section>";
+  function nowMonths() {
+    var n = new Date();
+    return n.getFullYear() * 12 + n.getMonth() + 1;
+  }
+  // The data is month-granular, so the countdown is too. A day figure here
+  // would be precision the source never had.
+  function awayLabel(delta) {
+    var n = Math.abs(delta);
+    if (n === 0) return "this month";
+    return n + (n === 1 ? " month " : " months ") + (delta > 0 ? "out" : "ago");
+  }
+  function datedMilestones(d) {
+    return d.designTimeline.map(function (m) {
+      return { date: m.date, label: m.label, type: m.type, t: toMonths(m.date) };
+    }).filter(function (m) { return isFinite(m.t); }).sort(function (a, b) { return a.t - b.t; });
+  }
+  function sec(id, n, title, hint, inner) {
+    return '<section class="sec" id="' + id + '"><div class="eyebrow"><span class="n">' + esc(n) +
+      "</span><span>" + esc(title) + "</span>" +
+      (hint ? '<span class="hint">' + esc(hint) + "</span>" : "") + "</div>" + inner + "</section>";
+  }
+
+  /* ── the call sheet: what to do, before the detail ───── */
+  function callSheet(d) {
+    var ms = datedMilestones(d), now = nowMonths();
+    var next = null, last = null;
+    ms.forEach(function (m) {
+      if (m.t >= now) { if (!next) next = m; } else { last = m; }
+    });
+    var moment = next || last;
+    var lead = d.signals[0] || null;
+    var graded = d.signals.filter(function (s) { return s.confidence; });
+    var high = d.signals.filter(function (s) { return s.confidence === "high"; }).length;
+    var sourced = d.signals.filter(function (s) { return s.source; }).length +
+      d.news.filter(function (n) { return n.source; }).length;
+
+    var momentCell = moment
+      ? '<div class="cell"><span class="k">' + (next ? "Next buying moment" : "Most recent moment") + "</span>" +
+        '<div class="figure"><span class="num" style="color:var(--' + moment.type + ')">' +
+        (moment.t === now ? "Now" : Math.abs(moment.t - now)) + '</span><span class="unit">' +
+        (moment.t === now ? "landing this month" : (moment.t > now ? "months out" : "months ago")) + "</span></div>" +
+        '<div class="lead">' + esc(moment.label) + "</div>" +
+        '<div class="sub">' + esc(TYPE_LABEL[moment.type]) + " · " + esc(prettyMonth(moment.date)) + "</div></div>"
+      : '<div class="cell"><span class="k">Next buying moment</span><div class="lead">No dated milestones came back</div>' +
+        '<div class="sub">Nothing to plot on the calendar for this account.</div></div>';
+
+    var leadCell = lead
+      ? '<div class="cell"><span class="k">Lead with</span>' +
+        '<div class="prod" style="color:var(--' + PRODUCT_HUE[lead.product] + ')">' + esc(lead.product) + "</div>" +
+        '<div class="sub" style="margin-top:5px">' + esc(lead.signal) + "</div></div>"
+      : '<div class="cell"><span class="k">Lead with</span><div class="lead">No signal met the bar</div>' +
+        '<div class="sub">No dated evidence, so no product recommendation.</div></div>';
+
+    var bars = CONF.map(function (c) {
+      return d.signals.filter(function (s) { return s.confidence === c; }).length;
+    });
+    var barHtml = "";
+    d.signals.forEach(function (s) {
+      barHtml += '<i class="' + (s.confidence === "high" ? "on" : "") + '"></i>';
+    });
+
+    var confCell = '<div class="cell"><span class="k">How solid</span>' +
+      '<div class="figure"><span class="num">' + high + '</span><span class="unit">of ' +
+      d.signals.length + " high confidence</span></div>" +
+      (barHtml ? '<div class="bars">' + barHtml + "</div>" : "") +
+      '<div class="sub" style="margin-top:6px">' + sourced + " claim" + (sourced === 1 ? "" : "s") +
+      " carry a source. Verify before you send." + "</div></div>";
+
+    return '<div class="callsheet">' + momentCell + leadCell + confCell + "</div>";
   }
 
   /* ── sections ────────────────────────────────────────── */
-  function vital(k, v) {
-    return v ? "<div><dt>" + esc(k) + "</dt><dd>" + esc(v) + "</dd></div>" : "";
-  }
+  function vital(k, v) { return v ? "<div><dt>" + esc(k) + "</dt><dd>" + esc(v) + "</dd></div>" : ""; }
 
   function headerHtml(d, isExample) {
     var co = d.company;
     var vitals = vital("Headquarters", co.hq) + vital("Chief executive", co.ceo) + vital("Employees", co.employees);
-    return '<section class="sec" style="padding-top:30px">' +
+    return '<section class="sec" style="padding-top:28px">' +
       '<div class="co"><div><h2>' + esc(co.name) +
       (co.ticker ? '<span class="tick">' + esc(co.ticker) + "</span>" : "") + "</h2>" +
       (co.segments.length
         ? '<div class="segs">' + co.segments.map(function (s) { return '<span class="seg">' + esc(s) + "</span>"; }).join("") + "</div>"
-        : "") +
-      "</div>" + (vitals ? '<dl class="vitals">' + vitals + "</dl>" : "") + "</div>" +
+        : "") + "</div>" +
+      '<div style="display:flex;flex-direction:column;gap:14px;align-items:flex-end">' +
+      (vitals ? '<dl class="vitals">' + vitals + "</dl>" : "") +
+      '<div class="coacts"><button type="button" class="mini" id="copyall">Copy brief</button>' +
+      '<button type="button" class="mini" id="savebrief" hidden>Save as .md</button>' +
+      '<span class="said" id="saidall"></span></div>' +
+      "</div></div>" +
       (isExample
-        ? '<div class="alert" style="margin-top:20px"><b>This is a worked example.</b> Northwind Silicon is invented — every figure below is fabricated to show the layout. Search a real company above to replace it.</div>'
+        ? '<div class="alert" style="margin-top:20px"><span><b>This is a worked example.</b> Northwind Silicon is invented — every figure below is fabricated to show the layout. Search a real company above to replace it.</span></div>'
         : "") +
       (d.limitations
-        ? '<div class="alert" style="margin-top:20px"><b>Thin coverage.</b> ' + esc(d.limitations) + "</div>"
+        ? '<div class="alert" style="margin-top:20px"><span><b>Thin coverage.</b> ' + esc(d.limitations) + "</span></div>"
         : (isThin(d)
-            ? '<div class="alert" style="margin-top:20px"><b>Little was recalled for this company.</b> That usually means it is private or small. The sections below show only what came back.</div>'
+            ? '<div class="alert" style="margin-top:20px"><span><b>Little was recalled for this company.</b> That usually means it is private or small. The sections below show only what came back.</span></div>'
             : "")) +
+      callSheet(d) +
       "</section>";
   }
 
   function signalsHtml(d) {
     if (!d.signals.length) return "";
     var name = d.company.name;
-    var cards = d.signals.map(function (s) {
-      var colour = "var(--" + (s.product === "Tessent" ? "packaging" : s.product === "Calibre" ? "tapeout" : s.product === "Veloce" ? "launch" : "node") + ")";
+    var cards = d.signals.map(function (s, i) {
+      var colour = "var(--" + PRODUCT_HUE[s.product] + ")";
       return '<article class="panel sig" style="border-top-color:' + colour + '">' +
+        (i === 0 ? '<span class="tag">Lead</span>' : "") +
         '<div class="sig-top"><span class="sig-prod" style="color:' + colour + '">' + esc(s.product) + "</span>" +
         '<span class="sig-when">' + esc(s.date) + "</span></div>" +
         "<h3>" + esc(s.signal) + "</h3>" +
@@ -766,31 +737,11 @@ footer {
         (s.evidenceLine ? '<div class="say"><span class="k">Say this</span>' + esc(s.evidenceLine) + "</div>" : "") +
         '<div class="srcline"><span class="src">' + (s.source ? esc(s.source) : "source not given") +
         (s.confidence ? ' <span class="conf">' + esc(s.confidence) + "</span>" : "") + "</span>" +
-        '<a class="verify" target="_blank" rel="noopener" href="' + attr(verifyUrl(s.signal, name)) + '">Verify ↗</a></div>' +
+        '<a class="verify" target="_blank" rel="noopener" href="' + esc(verifyUrl(s.signal, name)) + '">Verify ↗</a></div>' +
         "</article>";
     }).join("");
-    return sec("01", "Signals worth calling about", "each one maps to a product", '<div class="signals">' + cards + "</div>");
-  }
-
-  function emailsHtml(d, tab) {
-    if (!d.emails.length) return "";
-    var i = Math.min(tab, d.emails.length - 1);
-    var e = d.emails[i];
-    var linked = matchSignal(e, d.signals);
-    var tabs = d.emails.map(function (x, n) {
-      return '<button type="button" role="tab" data-tab="' + n + '" aria-selected="' + (n === i) + '">' + esc(x.persona) + "</button>";
-    }).join("");
-    var mail = "mailto:?subject=" + encodeURIComponent(e.subject) + "&body=" + encodeURIComponent(e.body);
-    return sec("02", "Outreach", "six sentences, one signal, one ask",
-      '<div class="panel"><div class="tabs" role="tablist">' + tabs + "</div>" +
-      '<div class="mailbody">' +
-      (e.angle ? '<p class="angle">' + esc(e.angle) + "</p>" : "") +
-      (linked ? '<p class="basedon"><span class="k">Built on</span><span>' + esc(linked.signal) + " · " + esc(linked.date) + "</span></p>" : "") +
-      '<div class="subj"><span class="k">Subject</span><span class="v">' + esc(e.subject) + "</span></div>" +
-      '<p class="draft">' + esc(e.body) + "</p>" +
-      '<div class="mailacts"><button type="button" id="copy">Copy draft</button>' +
-      '<a href="' + attr(mail) + '">Open in mail</a><span class="said" id="said"></span></div>' +
-      "</div></div>");
+    return sec("s-signals", "01", "Signals worth calling about", "surest first, each mapped to a product",
+      '<div class="signals">' + cards + "</div>");
   }
 
   // Nothing links an email to a signal, so infer it: the signal sharing the most
@@ -815,25 +766,41 @@ footer {
     return bestScore >= 2 ? best : null;
   }
 
+  function emailsHtml(d, tab) {
+    if (!d.emails.length) return "";
+    var i = Math.min(tab, d.emails.length - 1);
+    var e = d.emails[i];
+    var linked = matchSignal(e, d.signals);
+    var tabs = d.emails.map(function (x, n) {
+      return '<button type="button" role="tab" data-tab="' + n + '" aria-selected="' + (n === i) + '">' + esc(x.persona) + "</button>";
+    }).join("");
+    var mail = "mailto:?subject=" + encodeURIComponent(e.subject) + "&body=" + encodeURIComponent(e.body);
+    return sec("s-outreach", "02", "Outreach", "six sentences, one signal, one ask",
+      '<div class="panel"><div class="tabs" role="tablist">' + tabs + "</div>" +
+      '<div class="mailbody">' +
+      (e.angle ? '<p class="angle">' + esc(e.angle) + "</p>" : "") +
+      (linked ? '<p class="basedon"><span class="k">Built on</span><span>' + esc(linked.signal) + " · " + esc(linked.date) + "</span></p>" : "") +
+      '<div class="subj"><span class="k">Subject</span><span class="v">' + esc(e.subject) + "</span></div>" +
+      '<p class="draft">' + esc(e.body) + "</p>" +
+      '<div class="mailacts"><button type="button" id="copy">Copy draft</button>' +
+      '<a href="' + esc(mail) + '">Open in mail</a><span class="said" id="said"></span></div>' +
+      "</div></div>");
+  }
+
   function calendarHtml(d) {
-    var ms = d.designTimeline.map(function (m) {
-      return { date: m.date, label: m.label, type: m.type, t: toMonths(m.date) };
-    }).filter(function (m) { return isFinite(m.t); }).sort(function (a, b) { return a.t - b.t; });
+    var ms = datedMilestones(d);
     if (!ms.length) return "";
 
     var min = ms[0].t, max = ms[ms.length - 1].t, span = max - min;
     var pct = function (t) { return span === 0 ? 50 : ((t - min) / span) * 100; };
-
-    var now = new Date();
-    var nowT = now.getFullYear() * 12 + now.getMonth() + 1;
-    var nowPct = pct(nowT);
+    var now = nowMonths(), nowPct = pct(now);
+    var nextT = null;
+    ms.forEach(function (m) { if (nextT === null && m.t >= now) nextT = m.t; });
 
     var ticks = "";
     for (var y = Math.ceil(min / 12); y <= Math.floor(max / 12); y++) {
       var tp = pct(y * 12 + 1);
-      if (tp >= 0 && tp <= 100) {
-        ticks += '<div class="cal-year" style="left:' + tp + '%"><span>' + y + "</span></div>";
-      }
+      if (tp >= 0 && tp <= 100) ticks += '<div class="cal-year" style="left:' + tp + '%"><span>' + y + "</span></div>";
     }
 
     var pins = ms.map(function (m, i) {
@@ -842,11 +809,14 @@ footer {
       var shift = x < 11 ? "0%" : x > 89 ? "-100%" : "-50%";
       var align = x < 11 ? "left" : x > 89 ? "right" : "center";
       var colour = "var(--" + m.type + ")";
-      return '<div class="pin" style="left:' + x + "%;background:" + colour + '" title="' + attr(prettyMonth(m.date) + " — " + m.label) + '"></div>' +
+      var isNext = m.t === nextT;
+      return '<div class="pin" style="left:' + x + "%;background:" + colour + '"></div>' +
         '<div class="stem ' + (up ? "up" : "down") + '" style="left:' + x + '%"></div>' +
-        '<div class="mile ' + (up ? "up" : "down") + '" style="left:' + x + "%;transform:translateX(" + shift + ");text-align:" + align + '">' +
+        '<div class="mile ' + (up ? "up" : "down") + (isNext ? " next" : "") +
+        '" style="left:' + x + "%;transform:translateX(" + shift + ");text-align:" + align + '">' +
         '<div class="d" style="color:' + colour + '">' + esc(prettyMonth(m.date)) + "</div>" +
-        '<div class="l">' + esc(m.label) + "</div></div>";
+        '<div class="l">' + esc(m.label) + "</div>" +
+        '<div class="away">' + esc(TYPE_LABEL[m.type]) + " · " + esc(awayLabel(m.t - now)) + "</div></div>";
     }).join("");
 
     var used = {};
@@ -855,7 +825,7 @@ footer {
       return '<span><i style="background:var(--' + t + ')"></i>' + esc(TYPE_LABEL[t]) + "</span>";
     }).join("");
 
-    return sec("03", "Silicon calendar", "when the buying moments land",
+    return sec("s-calendar", "03", "Silicon calendar", "hover a milestone for how far out it is",
       '<div class="panel" style="padding:16px 10px 14px">' +
       '<div class="calwrap"><div class="cal"><div class="cal-axis"></div>' + ticks +
       (nowPct >= 0 && nowPct <= 100 ? '<div class="cal-now" style="left:' + nowPct + '%"><span>Today</span></div>' : "") +
@@ -869,9 +839,9 @@ footer {
       return '<article class="panel item"><div class="d">' + esc(n.date) + "</div><h3>" + esc(n.headline) + "</h3>" +
         (n.summary ? "<p>" + esc(n.summary) + "</p>" : "") +
         '<div class="f"><span>' + esc(n.source || "source not given") + "</span>" +
-        '<a class="verify" target="_blank" rel="noopener" href="' + attr(verifyUrl(n.headline, name)) + '">Verify ↗</a></div></article>';
+        '<a class="verify" target="_blank" rel="noopener" href="' + esc(verifyUrl(n.headline, name)) + '">Verify ↗</a></div></article>';
     }).join("");
-    return sec("04", "Recent developments", "", '<div class="rail">' + items + "</div>");
+    return sec("s-news", "04", "Recent developments", "", '<div class="rail">' + items + "</div>");
   }
 
   /* charts — one fixed viewBox, scaled by the browser */
@@ -904,12 +874,14 @@ footer {
       var cx = PL + slot * (i + 0.5);
       var h = PH * q.revenue / max;
       var sh = PH * Math.min(q.segmentRevenue, q.revenue) / max;
-      return '<rect x="' + (cx - bw / 2) + '" y="' + (BASE - h) + '" width="' + bw + '" height="' + h +
-        '" rx="1.5" fill="var(--chart-weak)" />' +
-        '<rect x="' + (cx - sw / 2) + '" y="' + (BASE - sh) + '" width="' + sw + '" height="' + sh +
-        '" rx="1.5" fill="var(--chart-strong)" />' +
+      var share = q.revenue > 0 ? Math.round(q.segmentRevenue / q.revenue * 100) : 0;
+      return "<g><title>" + esc(q.label + ": " + fmt(q.revenue) + "bn total, " + fmt(q.segmentRevenue) +
+        "bn lead segment (" + share + "%)") + "</title>" +
+        '<rect class="band" x="' + (PL + slot * i) + '" y="' + PT + '" width="' + slot + '" height="' + PH + '" />' +
+        '<rect x="' + (cx - bw / 2) + '" y="' + (BASE - h) + '" width="' + bw + '" height="' + h + '" rx="1.5" fill="var(--chart-weak)" />' +
+        '<rect x="' + (cx - sw / 2) + '" y="' + (BASE - sh) + '" width="' + sw + '" height="' + sh + '" rx="1.5" fill="var(--chart-strong)" />' +
         '<text class="vl" x="' + cx + '" y="' + (BASE - h - 6) + '" text-anchor="middle">' + fmt(q.revenue) + "</text>" +
-        '<text class="tk" x="' + cx + '" y="' + (BASE + 15) + '" text-anchor="middle">' + esc(q.label) + "</text>";
+        '<text class="tk" x="' + cx + '" y="' + (BASE + 15) + '" text-anchor="middle">' + esc(q.label) + "</text></g>";
     }).join("");
     return '<div class="panel chart"><div class="chart-top"><h3>Quarterly revenue</h3>' +
       '<div class="chart-key"><span><i style="background:var(--chart-weak)"></i>Total</span>' +
@@ -922,17 +894,20 @@ footer {
     var max = niceMax(Math.max.apply(null, rows.map(function (r) { return r.amount; }).concat([0.0001])));
     var fmt = fmtFor(max), slot = PW / rows.length;
     var pts = rows.map(function (r, i) {
-      return { x: PL + slot * (i + 0.5), y: BASE - PH * r.amount / max, r: r };
+      return { x: PL + slot * (i + 0.5), y: BASE - PH * r.amount / max, r: r, i: i };
     });
     var line = '<polyline fill="none" stroke="var(--node)" stroke-width="1.75" points="' +
       pts.map(function (p) { return p.x + "," + p.y; }).join(" ") + '" />';
     var dots = pts.map(function (p) {
-      return '<circle cx="' + p.x + '" cy="' + p.y + '" r="3.4" fill="var(--node)" />' +
+      return "<g><title>" + esc(p.r.year + ": " + fmt(p.r.amount) + "bn" +
+        (p.r.pctOfRevenue > 0 ? ", " + p.r.pctOfRevenue.toFixed(1) + "% of revenue" : "")) + "</title>" +
+        '<rect class="band" x="' + (PL + slot * p.i) + '" y="' + PT + '" width="' + slot + '" height="' + PH + '" />' +
+        '<circle cx="' + p.x + '" cy="' + p.y + '" r="3.4" fill="var(--node)" />' +
         '<text class="vl" x="' + p.x + '" y="' + (p.y - 9) + '" text-anchor="middle">' + fmt(p.r.amount) + "</text>" +
         '<text class="tk" x="' + p.x + '" y="' + (BASE + 15) + '" text-anchor="middle">' + esc(p.r.year) + "</text>" +
         (p.r.pctOfRevenue > 0
           ? '<text class="tk" x="' + p.x + '" y="' + (BASE + 26) + '" text-anchor="middle">' + p.r.pctOfRevenue.toFixed(1) + "%</text>"
-          : "");
+          : "") + "</g>";
     }).join("");
     return '<div class="panel chart"><div class="chart-top"><h3>R&amp;D spend</h3>' +
       '<span class="u">$bn · share of revenue</span></div>' +
@@ -943,15 +918,70 @@ footer {
   function chartsHtml(d) {
     var q = d.financials.quarters, r = d.financials.rdSpend;
     if (!q.length && !r.length) return "";
-    return sec("05", "Money", "billions, as reported",
+    return sec("s-money", "05", "Money", "billions, as reported · hover for the detail",
       '<div class="charts">' + (q.length ? revenueChart(q) : "") + (r.length ? rdChart(r) : "") + "</div>");
   }
 
   function briefHtml(d) {
     var ps = d.article.split(/\n{2,}/).map(function (p) { return p.trim(); }).filter(Boolean);
     if (!ps.length) return "";
-    return sec("06", "The brief", "readable out loud",
+    return sec("s-brief", "06", "The brief", "readable out loud",
       '<div class="brief">' + ps.map(function (p) { return "<p>" + esc(p) + "</p>"; }).join("") + "</div>");
+  }
+
+  /* ── the brief as text, for copy and save ────────────── */
+  function asMarkdown(d, isExample) {
+    var L = [], co = d.company, now = nowMonths();
+    L.push("# " + co.name + (co.ticker ? " (" + co.ticker + ")" : ""));
+    L.push("");
+    L.push(isExample
+      ? "_Worked example — this company is invented and every figure is fabricated._"
+      : "_Written from model recall, without web access. Verify every dated claim before use._");
+    var vit = [];
+    if (co.hq) vit.push("HQ: " + co.hq);
+    if (co.ceo) vit.push("CEO: " + co.ceo);
+    if (co.employees) vit.push("Employees: " + co.employees);
+    if (vit.length) { L.push(""); L.push(vit.join(" · ")); }
+    if (co.segments.length) { L.push(""); L.push("Segments: " + co.segments.join(", ")); }
+    if (d.limitations) { L.push(""); L.push("> " + d.limitations); }
+
+    if (d.signals.length) {
+      L.push("", "## Signals");
+      d.signals.forEach(function (s) {
+        L.push("", "### " + s.product + " — " + s.signal);
+        L.push("- When: " + (s.date || "undated") + (s.confidence ? " · confidence: " + s.confidence : ""));
+        if (s.source) L.push("- Source: " + s.source);
+        if (s.meaning) L.push("- Means: " + s.meaning);
+        if (s.evidenceLine) L.push("- Say: " + s.evidenceLine);
+      });
+    }
+    if (d.designTimeline.length) {
+      L.push("", "## Silicon calendar");
+      datedMilestones(d).forEach(function (m) {
+        L.push("- " + prettyMonth(m.date) + " — " + m.label + " (" + TYPE_LABEL[m.type].toLowerCase() +
+          ", " + awayLabel(m.t - now) + ")");
+      });
+    }
+    if (d.emails.length) {
+      L.push("", "## Outreach");
+      d.emails.forEach(function (e) {
+        L.push("", "### " + e.persona + (e.angle ? " — " + e.angle : ""));
+        L.push("**Subject:** " + e.subject, "", e.body);
+      });
+    }
+    if (d.news.length) {
+      L.push("", "## Recent developments");
+      d.news.forEach(function (n) {
+        L.push("- " + (n.date ? n.date + " — " : "") + n.headline + (n.source ? " (" + n.source + ")" : ""));
+        if (n.summary) L.push("  " + n.summary);
+      });
+    }
+    if (d.article) { L.push("", "## The brief", "", d.article); }
+    return L.join("\n") + "\n";
+  }
+
+  function slug(s) {
+    return String(s).toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "") || "company";
   }
 
   /* ── page state ──────────────────────────────────────── */
@@ -959,16 +989,57 @@ footer {
   var qEl = document.getElementById("q");
   var goEl = document.getElementById("go");
   var againEl = document.getElementById("again");
+  var stopEl = document.getElementById("stop");
+  var recentsEl = document.getElementById("recents");
   var footState = document.getElementById("foot-state");
+  var railnav = document.getElementById("railnav");
+  var railList = document.getElementById("railnav-list");
+
   var state = { data: EXAMPLE, isExample: true, loading: false, error: "", tab: 0, company: "Northwind Silicon" };
-  var sampleFn = null, controller = null, stageTimer = null, stage = 0;
+  var sampleFn = null, saveFn = null, controller = null;
+  var stageTimer = null, tickTimer = null, stage = 0, startedAt = 0;
+  var observer = null;
+
+  var SEEDS = ["AMD", "Nvidia", "Tenstorrent", "Infineon"];
+
+  function readJson(key, fallback) {
+    try {
+      var raw = localStorage.getItem(key);
+      return raw ? JSON.parse(raw) : fallback;
+    } catch (e) { return fallback; }
+  }
+  function writeJson(key, v) {
+    try { localStorage.setItem(key, JSON.stringify(v)); } catch (e) { /* private mode */ }
+  }
+  function recents() { return readJson("sab:recent", []); }
+  function remember(name) {
+    var r = recents().filter(function (x) { return x.toLowerCase() !== name.toLowerCase(); });
+    r.unshift(name);
+    writeJson("sab:recent", r.slice(0, 6));
+    renderRecents();
+  }
+  function cached(name) { return readJson("sab:co:" + name.toLowerCase(), null); }
+  function cache(name, d) { writeJson("sab:co:" + name.toLowerCase(), d); }
+
+  function renderRecents() {
+    if (!sampleFn) return;
+    var r = recents();
+    var label = r.length ? "Recent" : "Try";
+    var items = (r.length ? r : SEEDS);
+    recentsEl.innerHTML = '<span class="k">' + label + "</span>" +
+      items.map(function (c) {
+        return '<button type="button" class="mini" data-co="' + esc(c) + '">' + esc(c) + "</button>";
+      }).join("") +
+      (r.length ? '<button type="button" class="mini" data-clear="1">Clear</button>' : "");
+  }
 
   function skeleton() {
     var card = '<div class="panel skcard"><div class="sk" style="height:11px;width:34%"></div>' +
       '<div class="sk" style="height:15px;width:88%"></div><div class="sk" style="height:15px;width:66%"></div>' +
       '<div class="sk" style="height:58px;width:100%"></div></div>';
-    return '<section class="sec" style="padding-top:30px">' +
-      '<div class="status"><i></i><span id="stage">' + esc(STAGES[0]) + "</span></div>" +
+    return '<section class="sec" style="padding-top:28px">' +
+      '<div class="status" role="status"><i></i><span id="stage">' + esc(STAGES[0]) + "</span>" +
+      '<span class="el" id="elapsed">0s</span></div>' +
       '<div class="skels"><div class="panel skcard"><div class="sk" style="height:26px;width:38%"></div>' +
       '<div class="sk" style="height:13px;width:62%"></div></div>' +
       '<div class="skrow">' + card + card + card + "</div>" +
@@ -979,11 +1050,18 @@ footer {
   }
 
   function render() {
-    if (state.loading) { app.innerHTML = skeleton(); return; }
+    if (observer) { observer.disconnect(); observer = null; }
+
+    if (state.loading) {
+      railnav.hidden = true;
+      app.innerHTML = skeleton();
+      return;
+    }
+
     var out = "";
     if (state.error) {
-      out += '<section class="sec" style="padding-top:30px"><div class="alert"><b>' +
-        esc(state.error) + "</b></div></section>";
+      out += '<section class="sec" style="padding-top:28px"><div class="alert"><span><b>' +
+        esc(state.error) + '</b></span><button type="button" id="retry">Try again</button></div></section>';
     }
     var d = state.data;
     if (d) {
@@ -991,59 +1069,80 @@ footer {
         calendarHtml(d) + newsHtml(d) + chartsHtml(d) + briefHtml(d);
     }
     app.innerHTML = out;
+
+    if (saveFn) {
+      var sb = document.getElementById("savebrief");
+      if (sb) sb.hidden = false;
+    }
+
     footState.textContent = state.isExample
       ? "Example briefing · fabricated company"
       : "Briefing on " + d.company.name + " · unverified recall";
+
+    buildNav();
   }
 
-  function setStage() {
-    var el = document.getElementById("stage");
-    if (el && stage < STAGES.length - 1) { stage += 1; el.textContent = STAGES[stage]; }
+  function buildNav() {
+    var present = SECTIONS.filter(function (s) { return document.getElementById(s.id); });
+    if (present.length < 2) { railnav.hidden = true; return; }
+    railList.innerHTML = present.map(function (s) {
+      return '<li><a href="#' + s.id + '"><span class="n">' + s.n + "</span>" + esc(s.label) + "</a></li>";
+    }).join("");
+    railnav.hidden = false;
+
+    if (!("IntersectionObserver" in window)) return;
+    var links = {};
+    railList.querySelectorAll("a").forEach(function (a) { links[a.getAttribute("href").slice(1)] = a; });
+    observer = new IntersectionObserver(function (entries) {
+      entries.forEach(function (en) {
+        if (!en.isIntersecting) return;
+        Object.keys(links).forEach(function (k) { links[k].setAttribute("aria-current", String(k === en.target.id)); });
+      });
+    }, { rootMargin: "-56px 0px -70% 0px", threshold: 0 });
+    present.forEach(function (s) { observer.observe(document.getElementById(s.id)); });
   }
 
   var ERRORS = {
-    not_granted: "You declined the request, so no briefing was built. Press Build brief to try again.",
-    rate_limited: "Claude is rate limited right now. Give it a minute and try again.",
-    invalid_json: "The briefing came back malformed. Try once more — it usually lands on the second attempt.",
-    empty_completion: "Nothing came back. Try again, or try a better-known company.",
+    not_granted: "You declined the request, so no briefing was built.",
+    rate_limited: "Claude is rate limited right now. Give it a minute.",
+    invalid_json: "The briefing came back malformed. It usually lands on the second attempt.",
+    empty_completion: "Nothing came back. Try a better-known company.",
     prompt_too_large: "That company name is too long.",
     refused: "Claude declined to answer this one.",
-    cancelled: "Stopped.",
-    session_expired: "Your session expired. Reload the page and try again.",
+    cancelled: "Stopped before the briefing finished.",
+    session_expired: "Your session expired. Reload the page.",
     sampling_disabled: "Claude requests are switched off for this page.",
     not_declared: "This page cannot reach Claude.",
-    upstream_error: "The request failed part-way. Try again."
+    upstream_error: "The request failed part-way."
   };
-
-  function cacheKey(name) { return "sab:" + name.toLowerCase(); }
-  function readCache(name) {
-    try {
-      var raw = localStorage.getItem(cacheKey(name));
-      return raw ? JSON.parse(raw) : null;
-    } catch (e) { return null; }
-  }
-  function writeCache(name, data) {
-    try { localStorage.setItem(cacheKey(name), JSON.stringify(data)); } catch (e) { /* private mode */ }
-  }
 
   function run(company, refresh) {
     if (!sampleFn || state.loading) return;
 
     if (!refresh) {
-      var hit = readCache(company);
+      var hit = cached(company);
       if (hit) {
-        state.data = hit; state.isExample = false; state.error = ""; state.tab = 0;
-        state.company = company;
+        state.data = hit; state.isExample = false; state.error = ""; state.tab = 0; state.company = company;
         againEl.hidden = false;
+        remember(company);
         render();
         return;
       }
     }
 
-    state.loading = true; state.error = ""; stage = 0;
-    goEl.disabled = true; againEl.disabled = true;
+    state.loading = true; state.error = ""; stage = 0; startedAt = Date.now();
+    goEl.disabled = true; againEl.disabled = true; stopEl.hidden = false;
     render();
-    stageTimer = setInterval(setStage, 9000);
+
+    stageTimer = setInterval(function () {
+      var el = document.getElementById("stage");
+      if (el && stage < STAGES.length - 1) { stage += 1; el.textContent = STAGES[stage]; }
+    }, 9000);
+    tickTimer = setInterval(function () {
+      var el = document.getElementById("elapsed");
+      if (el) el.textContent = Math.round((Date.now() - startedAt) / 1000) + "s";
+    }, 1000);
+
     controller = new AbortController();
 
     sampleFn.json(buildPrompt(company), {
@@ -1053,17 +1152,25 @@ footer {
     }).then(function (raw) {
       var d = normalize(raw, company);
       state.data = d; state.isExample = false; state.company = company; state.tab = 0;
-      writeCache(company, d);
+      cache(company, d);
+      remember(company);
       againEl.hidden = false;
     }).catch(function (err) {
       var code = err && err.code;
-      state.error = ERRORS[code] || (err && err.message) || "The briefing failed. Try again.";
+      state.error = ERRORS[code] || (err && err.message) || "The briefing failed.";
     }).then(function () {
-      clearInterval(stageTimer);
-      state.loading = false;
-      goEl.disabled = false; againEl.disabled = false;
+      clearInterval(stageTimer); clearInterval(tickTimer);
+      state.loading = false; controller = null;
+      goEl.disabled = false; againEl.disabled = false; stopEl.hidden = true;
       render();
     });
+  }
+
+  function flash(id, msg) {
+    var el = document.getElementById(id);
+    if (!el) return;
+    el.textContent = msg;
+    setTimeout(function () { el.textContent = ""; }, 2200);
   }
 
   /* ── events ──────────────────────────────────────────── */
@@ -1072,28 +1179,65 @@ footer {
     var v = qEl.value.trim();
     if (v) run(v, false);
   });
+  againEl.addEventListener("click", function () { if (state.company) run(state.company, true); });
+  stopEl.addEventListener("click", function () { if (controller) controller.abort(); });
 
-  againEl.addEventListener("click", function () {
-    if (state.company) run(state.company, true);
-  });
-
-  document.getElementById("examples").addEventListener("click", function (e) {
+  recentsEl.addEventListener("click", function (e) {
+    var clear = e.target.closest("[data-clear]");
+    if (clear) { writeJson("sab:recent", []); renderRecents(); return; }
     var b = e.target.closest("button[data-co]");
     if (!b) return;
     qEl.value = b.getAttribute("data-co");
     run(qEl.value, false);
   });
 
+  document.addEventListener("keydown", function (e) {
+    if (e.key === "/" && document.activeElement !== qEl && !e.metaKey && !e.ctrlKey) {
+      e.preventDefault();
+      qEl.focus();
+      qEl.select();
+    }
+  });
+
   app.addEventListener("click", function (e) {
     var t = e.target.closest("[data-tab]");
     if (t) { state.tab = Number(t.getAttribute("data-tab")); render(); return; }
+
+    if (e.target.id === "retry") {
+      state.error = "";
+      if (state.company && sampleFn) run(state.company, true); else render();
+      return;
+    }
+
     if (e.target.id === "copy") {
-      var e2 = state.data.emails[Math.min(state.tab, state.data.emails.length - 1)];
-      var said = document.getElementById("said");
-      navigator.clipboard.writeText(e2.subject + "\n\n" + e2.body).then(function () {
-        if (said) { said.textContent = "Copied"; setTimeout(function () { said.textContent = ""; }, 1800); }
-      }).catch(function () {
-        if (said) said.textContent = "Copy blocked — select the text instead";
+      var em = state.data.emails[Math.min(state.tab, state.data.emails.length - 1)];
+      navigator.clipboard.writeText(em.subject + "\n\n" + em.body)
+        .then(function () { flash("said", "Copied"); })
+        .catch(function () { flash("said", "Copy blocked — select the text"); });
+      return;
+    }
+
+    if (e.target.id === "copyall") {
+      navigator.clipboard.writeText(asMarkdown(state.data, state.isExample))
+        .then(function () { flash("saidall", "Brief copied"); })
+        .catch(function () { flash("saidall", "Copy blocked"); });
+      return;
+    }
+
+    if (e.target.id === "savebrief" && saveFn) {
+      saveFn.save({
+        filename: "brief-" + slug(state.data.company.name) + ".md",
+        data: asMarkdown(state.data, state.isExample)
+      }).then(function (res) {
+        if (res && res.status === "saved") flash("saidall", "Saved");
+      }).catch(function (err) {
+        if (err && err.code === "unavailable") {
+          saveFn = null;
+          var sb = document.getElementById("savebrief");
+          if (sb) sb.hidden = true;
+        } else if (err && err.code !== "declined") {
+          flash("saidall", "Save failed");
+        }
       });
     }
   });
@@ -1106,8 +1250,14 @@ footer {
     window.claude.use("sample").then(function (fn) {
       sampleFn = fn;
       goEl.disabled = !fn;
-      if (!fn) noClaude();
-    }).catch(function () { noClaude(); });
+      if (fn) renderRecents(); else noClaude();
+    }).catch(noClaude);
+
+    window.claude.use("downloads").then(function (dl) {
+      saveFn = dl;
+      var sb = document.getElementById("savebrief");
+      if (sb && dl) sb.hidden = false;
+    }).catch(function () { saveFn = null; });
   } else {
     noClaude();
   }
@@ -1115,9 +1265,9 @@ footer {
   function noClaude() {
     sampleFn = null;
     goEl.disabled = true;
-    var ex = document.getElementById("examples");
-    ex.innerHTML = '<span class="k">Read-only</span><span style="font-size:13px;color:var(--muted)">' +
-      "Open this page inside Claude to build a live briefing. The example below still works.</span>";
+    recentsEl.innerHTML = '<span class="k">Read-only</span>' +
+      '<span style="font-size:13px;color:var(--muted)">Open this page inside Claude to build a live briefing. ' +
+      "The example below works either way.</span>";
   }
 })();
 </script>
