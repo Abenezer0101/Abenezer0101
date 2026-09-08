@@ -7,6 +7,18 @@ email generator, a silicon calendar, a news rail, financial charts, and a brief.
 
 No database, no auth, no multi-page routing. One page, one route, one data shape.
 
+## Two versions
+
+**`app/` + `lib/` — the Next.js app.** Live web search through the Claude API, so every
+fact is researched at request time. Needs your own API key and a server.
+
+**`standalone.html` — one file, no build, no key.**
+[Published here](https://claude.ai/code/artifact/9975c053-b2f4-4380-a172-2ee2f33bee5e).
+Same seven sections, but it asks Claude from the page on the viewer's own account,
+and that runtime **cannot browse** — the briefing comes from model recall, not
+research. It says so at the top and puts a Verify link on every sourced claim.
+Open it to see the thing working; use the Next.js app when the facts have to hold up.
+
 ## Run it
 
 ```bash
