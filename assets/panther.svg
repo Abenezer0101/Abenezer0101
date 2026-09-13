@@ -1,0 +1,95 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 420 380" width="420" height="380" role="img" aria-label="A panther roaring">
+<style>
+  .blk{fill:#0a0a0c}
+  .blu{fill:#1a3fd4}
+  .wht{fill:#fff}
+
+  #beast{transform-box:fill-box;transform-origin:50% 78%;animation:lunge 4s cubic-bezier(.3,.7,.4,1) infinite}
+  /* a front-facing jaw must DROP, not swing: rotation about a hinge throws
+     the chin sideways, which reads as a broken face rather than a roar */
+  #jaw{animation:chomp 4s cubic-bezier(.3,.7,.4,1) infinite}
+  .eye{animation:glare 4s ease-in-out infinite}
+  #throat{animation:gullet 4s cubic-bezier(.3,.7,.4,1) infinite}
+
+  @keyframes lunge{
+     0%,30%{transform:scale(1) translate(0,0)}
+    36%{transform:scale(.96) translate(0,-8px)}
+    43%{transform:scale(1.08) translate(0,4px)}
+    46%{transform:scale(1.075) translate(5px,4px)}
+    49%{transform:scale(1.075) translate(-5px,4px)}
+    52%{transform:scale(1.065) translate(3px,3px)}
+    55%{transform:scale(1.065) translate(-3px,3px)}
+    58%{transform:scale(1.05) translate(0,2px)}
+    70%{transform:scale(1.02) translate(0,0)}
+    78%,100%{transform:scale(1) translate(0,0)}
+  }
+  @keyframes chomp{
+     0%,32%{transform:translateY(0)}
+    37%{transform:translateY(-4px)}
+    43%{transform:translateY(52px)}
+    50%{transform:translateY(44px)}
+    56%{transform:translateY(52px)}
+    64%{transform:translateY(46px)}
+    74%{transform:translateY(12px)}
+    80%,100%{transform:translateY(0)}
+  }
+  @keyframes glare{
+     0%,34%{fill:#fff}
+    43%,64%{fill:#79e7ff}
+    78%,100%{fill:#fff}
+  }
+  @keyframes gullet{
+     0%,36%{opacity:0}
+    44%,66%{opacity:1}
+    76%,100%{opacity:0}
+  }
+  @media (prefers-reduced-motion:reduce){
+    #beast,#jaw,.eye,#throat{animation:none}
+  }
+</style>
+
+<g id="beast">
+  <g id="head">
+    <path id="sil" d="M210 92 L258 102 L288 72 L334 46 L354 146 L350 198 L330 250
+                      L288 300 L238 332 L210 338 L182 332 L132 300 L90 250
+                      L70 198 L66 146 L86 46 L132 72 L162 102 Z"
+          fill="#0a0a0c" stroke="#fff" stroke-width="6" stroke-linejoin="round"/>
+
+    <path class="blu" d="M322 68 L342 140 L316 124 L302 86 Z"/>
+    <path class="blu" d="M98 68 L78 140 L104 124 L118 86 Z"/>
+
+    <path class="blu" d="M210 104 L286 148 L300 198 L266 214 L238 194 L210 204
+                         L182 194 L154 214 L120 198 L134 148 Z"/>
+
+    <path class="blk" d="M210 132 L274 164 L264 190 L210 166 L156 190 L146 164 Z"/>
+
+    <path class="eye" d="M134 178 L196 196 L188 210 L146 198 Z"/>
+    <path class="eye" d="M286 178 L224 196 L232 210 L274 198 Z"/>
+
+    <path class="blu" d="M178 210 L242 210 L234 248 L210 256 L186 248 Z"/>
+    <path class="blk" d="M210 216 L230 230 L210 244 L190 230 Z"/>
+
+    <path class="blu" d="M76 212 L152 226 L78 238 Z"/>
+    <path class="blu" d="M84 248 L150 240 L92 268 Z"/>
+    <path class="blu" d="M344 212 L268 226 L342 238 Z"/>
+    <path class="blu" d="M336 248 L270 240 L328 268 Z"/>
+  </g>
+
+  <path id="throat" fill="#2b0a12" d="M150 252 L270 252 L258 330 L162 330 Z"/>
+
+  <g id="upperteeth">
+    <path class="wht" d="M162 252 L182 252 L174 300 Z"/>
+    <path class="wht" d="M258 252 L238 252 L246 300 Z"/>
+    <path class="wht" d="M188 252 L202 252 L196 276 Z"/>
+    <path class="wht" d="M208 252 L222 252 L216 276 Z"/>
+  </g>
+
+  <g id="jaw">
+    <path class="blk" d="M148 256 L272 256 L286 300 L238 334 L210 340 L182 334 L134 300 Z"/>
+    <path class="blu" d="M168 268 L252 268 L258 298 L210 322 L162 298 Z"/>
+    <path class="wht" d="M176 266 L192 266 L184 300 Z"/>
+    <path class="wht" d="M244 266 L228 266 L236 300 Z"/>
+    <path class="wht" d="M200 264 L214 264 L207 284 Z"/>
+  </g>
+</g>
+</svg>

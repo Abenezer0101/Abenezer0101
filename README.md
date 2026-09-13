@@ -1,19 +1,9 @@
 # Hi there! 👋 I'm Abenezer Bekele
 
-```
-     ▄        ▄                                          ▄
-     ██      ██                                         ██▀
-      ██▄▄▄▄██                                         ▄█▀
-     ▄█████████▄▄▄                                   ▄▄██
-  ▄████████████████████████▄▄▄▄▄▄▄▄▄▄▄▄▄▄█████████▄▄██▀▀
-   ▀▀▀▀▀▀▀▀█████████████████████████████████████████▀
-              ▀▀▀██████████████████████████████████▀
-                 ▀▀▀██▀▀▀▀██              ▄███▀▀███
-                   ▄██    ██             ▄███   ███
-                   ██▀    ██             ▀██    ███
-                  ▄██     ██▄              ██▄  ███
-                   ▀       ▀                ▀    ▀
-```
+<p align="center">
+  <img src="https://raw.githubusercontent.com/Abenezer0101/Abenezer0101/main/assets/panther.svg"
+       width="260" alt="A panther roaring">
+</p>
 
 **Builder of data dashboards and single-file web apps — turning data into things people can actually use.**
 
