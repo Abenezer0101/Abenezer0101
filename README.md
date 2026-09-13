@@ -1,5 +1,20 @@
 # Hi there! 👋 I'm Abenezer Bekele
 
+```
+     ▄        ▄                                          ▄
+     ██      ██                                         ██▀
+      ██▄▄▄▄██                                         ▄█▀
+     ▄█████████▄▄▄                                   ▄▄██
+  ▄████████████████████████▄▄▄▄▄▄▄▄▄▄▄▄▄▄█████████▄▄██▀▀
+   ▀▀▀▀▀▀▀▀█████████████████████████████████████████▀
+              ▀▀▀██████████████████████████████████▀
+                 ▀▀▀██▀▀▀▀██              ▄███▀▀███
+                   ▄██    ██             ▄███   ███
+                   ██▀    ██             ▀██    ███
+                  ▄██     ██▄              ██▄  ███
+                   ▀       ▀                ▀    ▀
+```
+
 **Builder of data dashboards and single-file web apps — turning data into things people can actually use.**
 
 - 🔭 Currently building interactive dashboards and lightweight web tools (no frameworks, just clean HTML/CSS/JS)
@@ -8,10 +23,17 @@
 - 📫 Reach me: **abenezerkoru10b@gmail.com**
 
 ## 🚀 Featured Projects
-- **[Account Intelligence](https://github.com/Abenezer0101/Tableau-Dashboard-Project/tree/main/account-intelligence)** 🎯 — scores prospective companies from 10-K signals into Pursue / Watch / Avoid tiers
-- **[Sales Ops Command](https://github.com/Abenezer0101/Tableau-Dashboard-Project/tree/main/sales-ops-dashboard)** 📊 — bookings vs quota, pipeline funnel, win rate, and a rep leaderboard
-- **[The Impossible Gift Machine](https://github.com/Abenezer0101/Tableau-Dashboard-Project/tree/main/gift-app)** 🎁 — a playful gift generator with canvas confetti and a collectible shelf
-- **[Tableau Dashboard Project](https://github.com/Abenezer0101/Tableau-Dashboard-Project)** 📈 — analyzing U.S. population and income correlations
+- **[minidb](https://github.com/Abenezer0101/minidb)** 🧱 — a SQL database engine written from scratch in Python; every query is run against SQLite and the results diffed, which caught six bugs I'd never have thought to test for
+- **[pdf-study-kit](https://github.com/Abenezer0101/pdf-study-kit)** 📄 — turns any PDF into summaries, flashcards and a quiz, fully offline
+- **[bikeshare-data-cleaning](https://github.com/Abenezer0101/bikeshare-data-cleaning)** 🚲 — a cleaning pipeline for messy trip data, plus the charts that exposed three bugs the tests had happily passed
+- **[projects](https://github.com/Abenezer0101/projects)** 🗂️ — 20+ dashboards, apps and data tools, with [live demos](https://abenezer0101.github.io/projects/)
+
+I build things and then try hard to break them. Most of what I've learned came from
+the bugs that got past the tests, so I check my work against something that disagrees
+with me: a reference implementation, a second language, or a real browser.
+
+I'd genuinely welcome a code review or any feedback — telling me what I got wrong is
+the useful part. ⭐️
 
 ## 🛠️ Tech Stack
 ![Python](https://img.shields.io/badge/Python-3776AB?style=for-the-badge&logo=python&logoColor=white)
