@@ -1,0 +1,88 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 400" width="900" height="400"
+     role="img" aria-label="A terminal-style profile card with a waving figure and system information">
+<style>
+  .bg{fill:#0c111b}
+  .win{fill:#141c2b}
+  .mono{font:13px ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;white-space:pre}
+  .art{fill:#7fc4ff}
+  .key{fill:#4f9ae6;font-weight:700}
+  .val{fill:#c3d0e2}
+  .dim{fill:#5f708c}
+  .ok{fill:#35c08a}
+  .hdr{fill:#e8edf6;font-weight:700}
+  .rule{stroke:#26344e;stroke-width:1}
+
+  /* the wave: two arm positions swapped on a timer. Cross-fading two glyph
+     runs is the only way to animate a character grid -- there is nothing to
+     tween between one letterform and another. */
+  #armUp{animation:up 1.4s steps(1,end) infinite}
+  #armOut{animation:out 1.4s steps(1,end) infinite}
+  @keyframes up { 0%,49%{opacity:1} 50%,100%{opacity:0} }
+  @keyframes out{ 0%,49%{opacity:0} 50%,100%{opacity:1} }
+
+  /* the cursor in the prompt line */
+  #cur{animation:blink 1.06s steps(1,end) infinite}
+  @keyframes blink{0%,49%{opacity:1}50%,100%{opacity:0}}
+
+  @media (prefers-reduced-motion:reduce){
+    #armUp{animation:none;opacity:1} #armOut{animation:none;opacity:0}
+    #cur{animation:none;opacity:1}
+  }
+</style>
+
+<rect class="bg" width="900" height="400" rx="14"/>
+<rect class="win" x="16" y="16" width="868" height="368" rx="10"/>
+<circle cx="40" cy="38" r="5" fill="#e2606a"/>
+<circle cx="58" cy="38" r="5" fill="#e0b341"/>
+<circle cx="76" cy="38" r="5" fill="#35c08a"/>
+<text class="mono dim" x="96" y="43">abenezer@github — ~</text>
+<line class="rule" x1="16" y1="56" x2="884" y2="56"/>
+
+<g class="mono art">
+  <text x="44" y="108">        ______</text>
+  <text x="44" y="124">       /      \</text>
+  <text x="44" y="140">      | ^    ^ |</text>
+  <text x="44" y="156">      |   __   |</text>
+  <text x="44" y="172">      |  \__/  |</text>
+  <text x="44" y="188">       \______/</text>
+  <text x="44" y="204">          |</text>
+  <text x="44" y="220">     _____|_____</text>
+  <text x="44" y="236">    /     |     \</text>
+  <text x="44" y="252">          |</text>
+  <text x="44" y="268">          |</text>
+  <text x="44" y="284">         / \</text>
+  <text x="44" y="300">        /   \</text>
+  <text x="44" y="316">      _/     \_</text>
+
+  <g id="armUp">
+  <text x="44" y="188">                   o</text>
+  <text x="44" y="204">                  /</text>
+  </g>
+  <g id="armOut">
+  <text x="44" y="204">                   o</text>
+  <text x="44" y="220">                  /</text>
+  </g>
+</g>
+<text class="mono dim" x="44" y="344">waving at you, whoever you are</text>
+
+<g class="mono">
+  <text x="360" y="92"><tspan class="hdr">abenezer</tspan><tspan class="dim">@</tspan><tspan class="hdr">github</tspan></text>
+  <text class="dim" x="360" y="108">--------------------------------------</text>
+
+  <text x="360" y="132"><tspan class="key">Studying......: </tspan><tspan class="val">CIS, Georgia State University</tspan></text>
+  <text x="360" y="150"><tspan class="key">Focus.........: </tspan><tspan class="val">data tools, pipelines, analytics</tspan></text>
+  <text x="360" y="168"><tspan class="key">Method........: </tspan><tspan class="val">build it, then try hard to break it</tspan></text>
+
+  <text x="360" y="198"><tspan class="key">Languages.....: </tspan><tspan class="val">Python, SQL, JavaScript</tspan></text>
+  <text x="360" y="216"><tspan class="key">Markup........: </tspan><tspan class="val">HTML, CSS, Markdown, TOML</tspan></text>
+  <text x="360" y="234"><tspan class="key">Tools.........: </tspan><tspan class="val">SQLite, Flask, Playwright, Git, Linux</tspan></text>
+
+  <text x="360" y="264"><tspan class="key">minidb........: </tspan><tspan class="val">SQL engine, diffed against SQLite</tspan></text>
+  <text x="360" y="282"><tspan class="key">assay.........: </tspan><tspan class="val">data gate that audits its own rules</tspan></text>
+  <text x="360" y="300"><tspan class="key">pdf-study-kit.: </tspan><tspan class="val">PDF to flashcards and a quiz</tspan></text>
+  <text x="360" y="318"><tspan class="key">projects......: </tspan><tspan class="val">27 dashboards, apps and data tools</tspan></text>
+
+  <text x="360" y="348"><tspan class="key">Email.........: </tspan><tspan class="val">abenezerkoru10b@gmail.com</tspan></text>
+  <text x="360" y="366"><tspan class="dim">$ </tspan><tspan class="ok">open to internship + new-grad roles</tspan><tspan id="cur" class="ok"> █</tspan></text>
+</g>
+</svg>
