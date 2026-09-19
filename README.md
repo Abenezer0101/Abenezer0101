@@ -40,14 +40,5 @@ the useful part. ⭐️
   <img src="https://streak-stats.demolab.com?user=Abenezer0101&theme=tokyonight&hide_border=true" alt="GitHub streak" />
 </p>
 
-## 🏆 GitHub Achievements & Visitor Counter
-
-<p align="center">
-  <img src="https://github-profile-trophy.vercel.app/?username=Abenezer0101&theme=tokyonight&no-frame=true&column=7&margin-w=8" alt="GitHub trophies" />
-</p>
-
-<p align="center">
-  <img src="https://komarev.com/ghpvc/?username=Abenezer0101&label=Profile%20views&color=0e75b6&style=flat" alt="Profile views" />
-</p>
 
 
