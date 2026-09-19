@@ -1,3 +1,8 @@
+<p align="center">
+  <img src="https://raw.githubusercontent.com/Abenezer0101/Abenezer0101/main/assets/cosmos.svg"
+       width="900" alt="A night sky with an aurora and a fairy trailing sparkles">
+</p>
+
 <a href="https://github.com/Abenezer0101">
   <picture>
     <source media="(prefers-color-scheme: dark)"

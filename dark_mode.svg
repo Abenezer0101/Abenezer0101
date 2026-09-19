@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='UTF-8'?>
-<svg xmlns="http://www.w3.org/2000/svg" width="936px" height="455px" font-size="15px" font-family="ConsolasFallback,Consolas,'DejaVu Sans Mono',Menlo,monospace" role="img" aria-label="Abenezer Bekele — profile card">
+<svg xmlns="http://www.w3.org/2000/svg" width="936px" height="417px" font-size="15px" font-family="ConsolasFallback,Consolas,'DejaVu Sans Mono',Menlo,monospace" role="img" aria-label="Abenezer Bekele — profile card">
 <style>
 @font-face{src:local('Consolas'),local('Consolas Bold');font-family:'ConsolasFallback';font-display:swap;size-adjust:109%;}
 .k{fill:#ffa657;} .v{fill:#a5d6ff;} .d{fill:#616e7f;}
@@ -54,8 +54,8 @@ text,tspan{white-space:pre;}
   }
 
 </style>
-<rect width="936px" height="455px" fill="#161b22" rx="15"/>
-<g transform="translate(24,79) scale(0.7142857142857143)"><g id="p-beast">
+<rect width="936px" height="417px" fill="#161b22" rx="15"/>
+<g transform="translate(24,60) scale(0.7142857142857143)"><g id="p-beast">
   <g id="head">
     <path id="sil" d="M210 92 L258 102 L288 72 L334 46 L354 146 L350 198 L330 250
                       L288 300 L238 332 L210 338 L182 332 L132 300 L90 250
@@ -116,6 +116,5 @@ text,tspan{white-space:pre;}
 <tspan x="352" y="296"><tspan class="k">Projects.portfolio</tspan><tspan class="d">.....: </tspan><tspan class="v">27 dashboards, apps and data tools</tspan></tspan>
 <tspan x="352" y="334"><tspan class="k">Contact.Email</tspan><tspan class="d">..........: </tspan><tspan class="v">abenezerkoru10b@gmail.com</tspan></tspan>
 <tspan x="352" y="353"><tspan class="k">Contact.GitHub</tspan><tspan class="d">.........: </tspan><tspan class="v">github.com/Abenezer0101</tspan></tspan>
-<tspan x="352" y="391"><tspan class="d">$ </tspan><tspan class="ok">open to internship + new-grad roles</tspan></tspan>
 </text>
 </svg>

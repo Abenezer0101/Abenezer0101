@@ -58,8 +58,6 @@ INFO = [
     None,
     ("Contact.Email", "abenezerkoru10b@gmail.com"),
     ("Contact.GitHub", "github.com/Abenezer0101"),
-    None,
-    ("status", "open to internship + new-grad roles"),
 ]
 
 THEMES = {
