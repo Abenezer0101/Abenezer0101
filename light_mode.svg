@@ -1,0 +1,121 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<svg xmlns="http://www.w3.org/2000/svg" width="936px" height="455px" font-size="15px" font-family="ConsolasFallback,Consolas,'DejaVu Sans Mono',Menlo,monospace" role="img" aria-label="Abenezer Bekele — profile card">
+<style>
+@font-face{src:local('Consolas'),local('Consolas Bold');font-family:'ConsolasFallback';font-display:swap;size-adjust:109%;}
+.k{fill:#953800;} .v{fill:#0a3069;} .d{fill:#6e7781;}
+.a{fill:#0969da;} .ok{fill:#1a7f37;}
+text,tspan{white-space:pre;}
+
+  .p-blk{fill:#0a0a0c}
+  .p-blu{fill:#1a3fd4}
+  .p-wht{fill:#fff}
+
+  #p-beast{transform-box:fill-box;transform-origin:50% 78%;animation:lunge 4s cubic-bezier(.3,.7,.4,1) infinite}
+  /* a front-facing jaw must DROP, not swing: rotation about a hinge throws
+     the chin sideways, which reads as a broken face rather than a roar */
+  #p-jaw{animation:chomp 4s cubic-bezier(.3,.7,.4,1) infinite}
+  .p-eye{animation:glare 4s ease-in-out infinite}
+  #p-throat{animation:gullet 4s cubic-bezier(.3,.7,.4,1) infinite}
+
+  @keyframes lunge{
+     0%,30%{transform:scale(1) translate(0,0)}
+    36%{transform:scale(.96) translate(0,-8px)}
+    43%{transform:scale(1.08) translate(0,4px)}
+    46%{transform:scale(1.075) translate(5px,4px)}
+    49%{transform:scale(1.075) translate(-5px,4px)}
+    52%{transform:scale(1.065) translate(3px,3px)}
+    55%{transform:scale(1.065) translate(-3px,3px)}
+    58%{transform:scale(1.05) translate(0,2px)}
+    70%{transform:scale(1.02) translate(0,0)}
+    78%,100%{transform:scale(1) translate(0,0)}
+  }
+  @keyframes chomp{
+     0%,32%{transform:translateY(0)}
+    37%{transform:translateY(-4px)}
+    43%{transform:translateY(52px)}
+    50%{transform:translateY(44px)}
+    56%{transform:translateY(52px)}
+    64%{transform:translateY(46px)}
+    74%{transform:translateY(12px)}
+    80%,100%{transform:translateY(0)}
+  }
+  @keyframes glare{
+     0%,34%{fill:#fff}
+    43%,64%{fill:#79e7ff}
+    78%,100%{fill:#fff}
+  }
+  @keyframes gullet{
+     0%,36%{opacity:0}
+    44%,66%{opacity:1}
+    76%,100%{opacity:0}
+  }
+  @media (prefers-reduced-motion:reduce){
+    #p-beast,#p-jaw,.eye,#p-throat{animation:none}
+  }
+
+</style>
+<rect width="936px" height="455px" fill="#ffffff" rx="15"/>
+<g transform="translate(24,79) scale(0.7142857142857143)"><g id="p-beast">
+  <g id="head">
+    <path id="sil" d="M210 92 L258 102 L288 72 L334 46 L354 146 L350 198 L330 250
+                      L288 300 L238 332 L210 338 L182 332 L132 300 L90 250
+                      L70 198 L66 146 L86 46 L132 72 L162 102 Z"
+          fill="#0a0a0c" stroke="#fff" stroke-width="6" stroke-linejoin="round"/>
+
+    <path class="p-blu" d="M322 68 L342 140 L316 124 L302 86 Z"/>
+    <path class="p-blu" d="M98 68 L78 140 L104 124 L118 86 Z"/>
+
+    <path class="p-blu" d="M210 104 L286 148 L300 198 L266 214 L238 194 L210 204
+                         L182 194 L154 214 L120 198 L134 148 Z"/>
+
+    <path class="p-blk" d="M210 132 L274 164 L264 190 L210 166 L156 190 L146 164 Z"/>
+
+    <path class="p-eye" d="M134 178 L196 196 L188 210 L146 198 Z"/>
+    <path class="p-eye" d="M286 178 L224 196 L232 210 L274 198 Z"/>
+
+    <path class="p-blu" d="M178 210 L242 210 L234 248 L210 256 L186 248 Z"/>
+    <path class="p-blk" d="M210 216 L230 230 L210 244 L190 230 Z"/>
+
+    <path class="p-blu" d="M76 212 L152 226 L78 238 Z"/>
+    <path class="p-blu" d="M84 248 L150 240 L92 268 Z"/>
+    <path class="p-blu" d="M344 212 L268 226 L342 238 Z"/>
+    <path class="p-blu" d="M336 248 L270 240 L328 268 Z"/>
+  </g>
+
+  <path id="p-throat" fill="#2b0a12" d="M150 252 L270 252 L258 330 L162 330 Z"/>
+
+  <g id="p-upperteeth">
+    <path class="p-wht" d="M162 252 L182 252 L174 300 Z"/>
+    <path class="p-wht" d="M258 252 L238 252 L246 300 Z"/>
+    <path class="p-wht" d="M188 252 L202 252 L196 276 Z"/>
+    <path class="p-wht" d="M208 252 L222 252 L216 276 Z"/>
+  </g>
+
+  <g id="p-jaw">
+    <path class="p-blk" d="M148 256 L272 256 L286 300 L238 334 L210 340 L182 334 L134 300 Z"/>
+    <path class="p-blu" d="M168 268 L252 268 L258 298 L210 322 L162 298 Z"/>
+    <path class="p-wht" d="M176 266 L192 266 L184 300 Z"/>
+    <path class="p-wht" d="M244 266 L228 266 L236 300 Z"/>
+    <path class="p-wht" d="M200 264 L214 264 L207 284 Z"/>
+  </g>
+</g>
+</g>
+<text fill="#1f2328" x="352" y="30">
+<tspan x="352" y="30"><tspan class="k">abenezer0101</tspan><tspan class="d">@</tspan><tspan class="k">github</tspan></tspan>
+<tspan class="d" x="352" y="49">----------------------------------------------</tspan>
+<tspan x="352" y="68"><tspan class="k">Studying</tspan><tspan class="d">...............: </tspan><tspan class="v">CIS, Georgia State University</tspan></tspan>
+<tspan x="352" y="87"><tspan class="k">Focus</tspan><tspan class="d">..................: </tspan><tspan class="v">data tools, pipelines, analytics</tspan></tspan>
+<tspan x="352" y="106"><tspan class="k">Method</tspan><tspan class="d">.................: </tspan><tspan class="v">build it, then try hard to break it</tspan></tspan>
+<tspan x="352" y="144"><tspan class="k">Languages.Programming</tspan><tspan class="d">..: </tspan><tspan class="v">Python, SQL, JavaScript</tspan></tspan>
+<tspan x="352" y="163"><tspan class="k">Languages.Markup</tspan><tspan class="d">.......: </tspan><tspan class="v">HTML, CSS, Markdown, TOML</tspan></tspan>
+<tspan x="352" y="182"><tspan class="k">Tools</tspan><tspan class="d">..................: </tspan><tspan class="v">SQLite, Flask, Playwright, Git</tspan></tspan>
+<tspan x="352" y="201"><tspan class="k">Environment</tspan><tspan class="d">............: </tspan><tspan class="v">Linux</tspan></tspan>
+<tspan x="352" y="239"><tspan class="k">Projects.minidb</tspan><tspan class="d">........: </tspan><tspan class="v">a SQL engine, diffed against SQLite</tspan></tspan>
+<tspan x="352" y="258"><tspan class="k">Projects.assay</tspan><tspan class="d">.........: </tspan><tspan class="v">a data gate that audits its own rules</tspan></tspan>
+<tspan x="352" y="277"><tspan class="k">Projects.pdf-study-kit</tspan><tspan class="d">.: </tspan><tspan class="v">PDF to flashcards and a quiz</tspan></tspan>
+<tspan x="352" y="296"><tspan class="k">Projects.portfolio</tspan><tspan class="d">.....: </tspan><tspan class="v">27 dashboards, apps and data tools</tspan></tspan>
+<tspan x="352" y="334"><tspan class="k">Contact.Email</tspan><tspan class="d">..........: </tspan><tspan class="v">abenezerkoru10b@gmail.com</tspan></tspan>
+<tspan x="352" y="353"><tspan class="k">Contact.GitHub</tspan><tspan class="d">.........: </tspan><tspan class="v">github.com/Abenezer0101</tspan></tspan>
+<tspan x="352" y="391"><tspan class="d">$ </tspan><tspan class="ok">open to internship + new-grad roles</tspan></tspan>
+</text>
+</svg>

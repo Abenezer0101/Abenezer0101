@@ -1,16 +1,11 @@
-# Hi there! 👋 I'm Abenezer Bekele
-
-<p align="center">
-  <img src="https://raw.githubusercontent.com/Abenezer0101/Abenezer0101/main/assets/panther.svg"
-       width="260" alt="A panther roaring">
-</p>
-
-**Builder of data dashboards and single-file web apps — turning data into things people can actually use.**
-
-- 🔭 Currently building interactive dashboards and lightweight web tools (no frameworks, just clean HTML/CSS/JS)
-- 📊 Into data visualization, sales/marketing intelligence, and Tableau
-- 💬 Ask me about dashboards, data viz, and shipping small elegant web apps
-- 📫 Reach me: **abenezerkoru10b@gmail.com**
+<a href="https://github.com/Abenezer0101">
+  <picture>
+    <source media="(prefers-color-scheme: dark)"
+            srcset="https://raw.githubusercontent.com/Abenezer0101/Abenezer0101/main/dark_mode.svg">
+    <img alt="Abenezer Bekele — CIS at Georgia State, building data tools"
+         src="https://raw.githubusercontent.com/Abenezer0101/Abenezer0101/main/light_mode.svg">
+  </picture>
+</a>
 
 ## 🚀 Featured Projects
 - **[minidb](https://github.com/Abenezer0101/minidb)** 🧱 — a SQL database engine written from scratch in Python; every query is run against SQLite and the results diffed, which caught six bugs I'd never have thought to test for
