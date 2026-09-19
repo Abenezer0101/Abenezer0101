@@ -1,11 +1,14 @@
-# Hi there! 👋 I'm Abenezer Bekele
+<p align="center">
+  <img src="https://raw.githubusercontent.com/Abenezer0101/Abenezer0101/main/assets/pipeline.svg"
+       width="860" alt="A data pipeline: rows flow from a source through a validation gate; clean rows pass through, failing rows are diverted into quarantine">
+</p>
 
 <p align="center">
   <img src="https://raw.githubusercontent.com/Abenezer0101/Abenezer0101/main/assets/panther.svg"
-       width="260" alt="A panther roaring">
+       width="150" alt="A panther roaring">
 </p>
 
-**Builder of data dashboards and single-file web apps — turning data into things people can actually use.**
+**Builder of data tools, dashboards and single-file web apps — turning data into things people can actually use.**
 
 - 🔭 Currently building interactive dashboards and lightweight web tools (no frameworks, just clean HTML/CSS/JS)
 - 📊 Into data visualization, sales/marketing intelligence, and Tableau

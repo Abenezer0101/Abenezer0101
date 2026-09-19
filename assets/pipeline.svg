@@ -1,0 +1,106 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 880 300" width="880" height="300"
+     role="img" aria-label="A data pipeline: rows flow from a source through a validation gate; clean rows pass through, failing rows are diverted into quarantine">
+<style>
+  .bg{fill:#0c111b}
+  .panel{fill:#141c2b}
+  .edge{fill:none;stroke:#26344e;stroke-width:1.5}
+  .belt{fill:none;stroke:#26344e;stroke-width:2}
+  .label{fill:#63748f;font:600 10px ui-monospace,SFMono-Regular,Menlo,monospace;letter-spacing:.14em}
+  .title{fill:#eaeff7;font:700 20px system-ui,-apple-system,"Segoe UI",sans-serif;letter-spacing:-.01em}
+  .sub{fill:#8b9cb8;font:400 13px system-ui,-apple-system,"Segoe UI",sans-serif}
+  .ok{fill:#35c08a} .bad{fill:#e2606a}
+
+  .track{fill:none;stroke:#26344e;stroke-width:2;stroke-dasharray:7 9;
+         animation:march 1.1s linear infinite}
+  @keyframes march{to{stroke-dashoffset:-16}}
+
+  .divert{fill:none;stroke:#3a2735;stroke-width:2;stroke-dasharray:4 7}
+
+  #beam{animation:sweep 1.7s ease-in-out infinite}
+  @keyframes sweep{
+    0%,100%{transform:translateX(-13px);opacity:.25}
+    50%{transform:translateX(13px);opacity:.9}
+  }
+
+  /* Each packet is a row. A passing row runs the whole belt; a failing row
+     gets as far as the gate, turns red, and drops into quarantine. One shared
+     duration keeps every row in step with the belt underneath it. */
+  .pkt{animation:pass 4.4s linear infinite}
+  .pkt.f{animation-name:fail}
+
+  @keyframes pass{
+     0%{transform:translate(0,0);opacity:0}
+     5%{opacity:1}
+    93%{opacity:1}
+   100%{transform:translate(672px,0);opacity:0}
+  }
+  /* transform AND fill in one keyframe set, on one element: a row turns red
+     exactly when it clears the gate, never before */
+  @keyframes fail{
+     0%{transform:translate(0,0);opacity:0;fill:#3f7fe0}
+     5%{opacity:1}
+    40%{transform:translate(272px,0);fill:#3f7fe0}
+    47%{transform:translate(296px,8px);fill:#e2606a}
+    62%{transform:translate(340px,62px);fill:#e2606a}
+    78%{transform:translate(372px,98px);opacity:1;fill:#e2606a}
+    86%,100%{transform:translate(376px,106px);opacity:0;fill:#e2606a}
+  }
+
+  .pulse{animation:pulse 4.4s ease-in-out infinite}
+  @keyframes pulse{0%,86%{opacity:.5}93%{opacity:1}100%{opacity:.5}}
+
+  @media (prefers-reduced-motion:reduce){
+    .track,#beam,.pkt,.pulse{animation:none}
+  }
+</style>
+
+<rect class="bg" width="880" height="300" rx="14"/>
+
+<text class="title" x="34" y="46">Abenezer Bekele</text>
+<text class="sub"   x="34" y="70">I build data tools, then try hard to break them.</text>
+
+<rect class="panel" x="34" y="120" width="94" height="66" rx="9"/>
+<rect class="edge"  x="34" y="120" width="94" height="66" rx="9"/>
+<g fill="#3f7fe0">
+  <rect x="50" y="133" width="62" height="8" rx="4"/>
+  <rect x="50" y="146" width="62" height="8" rx="4" opacity=".7"/>
+  <rect x="50" y="159" width="62" height="8" rx="4" opacity=".45"/>
+</g>
+<text class="label" x="34" y="206">SOURCE</text>
+
+<path class="track" d="M134 153 H786"/>
+<path class="divert" d="M446 176 Q492 208 520 230"/>
+
+<rect class="panel" x="392" y="115" width="60" height="76" rx="9"/>
+<rect class="edge"  x="392" y="115" width="60" height="76" rx="9"/>
+<rect id="beam" x="420" y="121" width="3" height="64" rx="1.5" fill="#3f7fe0"/>
+<text class="label" x="386" y="206">VALIDATE</text>
+
+<rect class="panel" x="742" y="126" width="104" height="54" rx="9"/>
+<rect class="edge"  x="742" y="126" width="104" height="54" rx="9"/>
+<circle class="ok pulse" cx="828" cy="140" r="4"/>
+<text class="label" x="756" y="206">CLEAN</text>
+
+<rect class="panel" x="470" y="236" width="118" height="42" rx="9"/>
+<rect class="edge"  x="470" y="236" width="118" height="42" rx="9"/>
+<g fill="#e2606a" opacity=".45">
+  <rect x="484" y="247" width="20" height="9" rx="3"/>
+  <rect x="508" y="247" width="20" height="9" rx="3" opacity=".7"/>
+  <rect x="484" y="260" width="20" height="9" rx="3" opacity=".5"/>
+</g>
+<circle class="bad pulse" cx="572" cy="250" r="4"/>
+<text class="label" x="604" y="262">QUARANTINE</text>
+
+<g transform="translate(142,146)">
+  <g class="pkt"                                 ><rect width="22" height="15" rx="4" fill="#3f7fe0"/></g>
+  <g class="pkt"   style="animation-delay:-.55s" ><rect width="22" height="15" rx="4" fill="#3f7fe0"/></g>
+  <g class="pkt f" style="animation-delay:-1.1s" ><rect width="22" height="15" rx="4"/></g>
+  <g class="pkt"   style="animation-delay:-1.65s"><rect width="22" height="15" rx="4" fill="#3f7fe0"/></g>
+  <g class="pkt"   style="animation-delay:-2.2s" ><rect width="22" height="15" rx="4" fill="#3f7fe0"/></g>
+  <g class="pkt"   style="animation-delay:-2.75s"><rect width="22" height="15" rx="4" fill="#3f7fe0"/></g>
+  <g class="pkt f" style="animation-delay:-3.3s" ><rect width="22" height="15" rx="4"/></g>
+  <g class="pkt"   style="animation-delay:-3.85s"><rect width="22" height="15" rx="4" fill="#3f7fe0"/></g>
+</g>
+
+<text class="label" x="34" y="266">PYTHON  ·  SQL  ·  JAVASCRIPT  ·  LINUX</text>
+</svg>
