@@ -3,14 +3,10 @@
        width="900" alt="A night sky with an aurora and a fairy trailing sparkles">
 </p>
 
-<a href="https://github.com/Abenezer0101">
-  <picture>
-    <source media="(prefers-color-scheme: dark)"
-            srcset="https://raw.githubusercontent.com/Abenezer0101/Abenezer0101/main/dark_mode.svg">
-    <img alt="Abenezer Bekele — CIS at Georgia State, building data tools"
-         src="https://raw.githubusercontent.com/Abenezer0101/Abenezer0101/main/light_mode.svg">
-  </picture>
-</a>
+<p align="center">
+  <img src="https://raw.githubusercontent.com/Abenezer0101/Abenezer0101/main/assets/panther.svg"
+       width="260" alt="A panther roaring">
+</p>
 
 ## 🚀 Featured Projects
 - **[minidb](https://github.com/Abenezer0101/minidb)** 🧱 — a SQL database engine written from scratch in Python; every query is run against SQLite and the results diffed, which caught six bugs I'd never have thought to test for
