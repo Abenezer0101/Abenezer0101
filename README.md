@@ -1,17 +1,16 @@
-<p align="center">
-  <img src="https://raw.githubusercontent.com/Abenezer0101/Abenezer0101/main/assets/pipeline.svg"
-       width="860" alt="A data pipeline: rows flow from a source through a validation gate; clean rows pass through, failing rows are diverted into quarantine">
-</p>
+# Hi there! 👋 I'm Abenezer Bekele
 
 <p align="center">
   <img src="https://raw.githubusercontent.com/Abenezer0101/Abenezer0101/main/assets/panther.svg"
-       width="150" alt="A panther roaring">
+       width="260" alt="A panther roaring">
 </p>
 
-<p align="center">
-  <img src="https://raw.githubusercontent.com/Abenezer0101/Abenezer0101/main/assets/neofetch.svg"
-       width="860" alt="A terminal card: a figure waving, beside system-style information about Abenezer">
-</p>
+**Builder of data dashboards and single-file web apps — turning data into things people can actually use.**
+
+- 🔭 Currently building interactive dashboards and lightweight web tools (no frameworks, just clean HTML/CSS/JS)
+- 📊 Into data visualization, sales/marketing intelligence, and Tableau
+- 💬 Ask me about dashboards, data viz, and shipping small elegant web apps
+- 📫 Reach me: **abenezerkoru10b@gmail.com**
 
 ## 🚀 Featured Projects
 - **[minidb](https://github.com/Abenezer0101/minidb)** 🧱 — a SQL database engine written from scratch in Python; every query is run against SQLite and the results diffed, which caught six bugs I'd never have thought to test for
@@ -25,6 +24,14 @@ with me: a reference implementation, a second language, or a real browser.
 
 I'd genuinely welcome a code review or any feedback — telling me what I got wrong is
 the useful part. ⭐️
+
+## 🛠️ Tech Stack
+![Python](https://img.shields.io/badge/Python-3776AB?style=for-the-badge&logo=python&logoColor=white)
+![JavaScript](https://img.shields.io/badge/JavaScript-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black)
+![HTML5](https://img.shields.io/badge/HTML5-E34F26?style=for-the-badge&logo=html5&logoColor=white)
+![CSS3](https://img.shields.io/badge/CSS3-1572B6?style=for-the-badge&logo=css3&logoColor=white)
+![Tableau](https://img.shields.io/badge/Tableau-E97627?style=for-the-badge&logo=tableau&logoColor=white)
+![Git](https://img.shields.io/badge/Git-F05032?style=for-the-badge&logo=git&logoColor=white)
 
 ## 📊 GitHub Stats
 
