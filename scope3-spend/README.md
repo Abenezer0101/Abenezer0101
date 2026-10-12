@@ -8,6 +8,7 @@ and a dollar amount; the estimate is spend × the EPA Supply Chain GHG Emission 
 python3 scope3.py examples/spend.csv            # CLI, standard library only
 python3 -m unittest test_scope3                 # tests
 open index.html                                 # same logic in the browser, works offline
+open story.html                                 # the data story: seven angles on the factors
 ```
 
 ```
@@ -58,4 +59,5 @@ should replace them where the hotspots are.
 
 `scope3.py` estimator and CLI · `test_scope3.py` tests · `page.template.html` +
 `build_page.py` → `index.html` (factors inlined; rebuild after changing the data) ·
+`story.page.html` + `story.shell.html` → `story.html` (the data story; d3 from cdnjs) ·
 `data/` EPA factors v1.3 · `examples/spend.csv` sample ledger
