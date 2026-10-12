@@ -1,0 +1,118 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Scope 3 Spend Estimator</title>
+<style>
+:root{--bg:#fbfaf7;--fg:#1d1d1b;--mute:#6b6a65;--line:#e4e1d8;--bar:#c2553a;--warn:#9a6b00;--card:#fff}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#151513;--fg:#ecebe6;--mute:#9b9a93;--line:#2f2e2a;--bar:#e07a5f;--warn:#e0b44a;--card:#1d1d1a}}
+:root[data-theme="dark"]{--bg:#151513;--fg:#ecebe6;--mute:#9b9a93;--line:#2f2e2a;--bar:#e07a5f;--warn:#e0b44a;--card:#1d1d1a}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--fg);font:15px/1.5 system-ui,-apple-system,sans-serif}
+main{max-width:960px;margin:0 auto;padding:32px 16px 64px}
+h1{font-size:26px;margin:0 0 4px}h2{font-size:17px;margin:36px 0 10px}
+p.lede{color:var(--mute);margin:0 0 24px;max-width:680px}
+textarea,input{width:100%;font:13px/1.45 ui-monospace,monospace;background:var(--card);color:var(--fg);border:1px solid var(--line);border-radius:8px;padding:10px}
+textarea{height:190px;resize:vertical}
+.row{display:flex;gap:12px;flex-wrap:wrap;align-items:center;margin:10px 0}
+.row label{color:var(--mute);font-size:13px}.row input{width:90px}
+.total{font-size:34px;font-weight:650;letter-spacing:-.02em}.sub{color:var(--mute)}
+table{width:100%;border-collapse:collapse;font-size:13px}
+td,th{padding:6px 8px;border-bottom:1px solid var(--line);text-align:left;vertical-align:top}
+th{color:var(--mute);font-weight:500}td.n{text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap}
+.b{height:8px;background:var(--bar);border-radius:2px;min-width:1px}
+.warn{color:var(--warn)}.scroll{overflow-x:auto}
+footer{color:var(--mute);font-size:12px;margin-top:40px}
+</style>
+</head>
+<body>
+<main>
+<h1>Scope 3 spend estimator</h1>
+<p class="lede">Paste purchases as <code>naics,spend,label</code>. Each line is multiplied by the EPA Supply Chain GHG Emission Factor (v1.3, kg CO2e per 2022 USD, purchaser price). Codes it cannot resolve are listed, never guessed.</p>
+
+<textarea id="input" spellcheck="false" aria-label="Spend CSV"></textarea>
+<div class="row">
+  <label>Multiply spend to 2022 USD <input id="defl" type="number" step="0.01" value="1"></label>
+  <label><input id="nomargin" type="checkbox" style="width:auto"> Producer price (exclude margins)</label>
+</div>
+
+<div id="out"></div>
+
+<h2>Factor lookup</h2>
+<input id="q" placeholder="Search a NAICS code or industry, e.g. cement, 4841, software" aria-label="Search factors">
+<div class="scroll"><table id="ft"></table></div>
+
+<footer>Data: US EPA, Supply Chain Greenhouse Gas Emission Factors v1.3 by NAICS-6. 1,016 codes map to 386 USEEIO sectors, so codes in one sector share a factor. Spend-based numbers are screening estimates, not supplier-specific data.</footer>
+</main>
+<script>
+const F = /*FACTORS*/;
+const SECTORS = /*SECTORS*/;
+const EXAMPLE = /*EXAMPLE*/;
+const $ = id => document.getElementById(id);
+const fmt = (x, d = 1) => x.toLocaleString("en-US", {minimumFractionDigits: d, maximumFractionDigits: d});
+const esc = s => String(s).replace(/[&<>"]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+
+function resolve(code, margins) {
+  const k = margins ? 1 : 2;
+  if (!/^\d{2,6}$/.test(code)) return {reason: "not a NAICS code"};
+  if (F[code]) return {factor: F[code][k], title: F[code][0]};
+  const under = Object.keys(F).filter(c => c.startsWith(code));
+  if (!under.length) return {reason: code.startsWith("2211") || "2211".startsWith(code)
+    ? "electric power is not in the dataset; report it under Scope 2" : "no factor for this code"};
+  const vals = [...new Set(under.map(c => F[c][k]))];
+  if (vals.length === 1) return {factor: vals[0], title: `${SECTORS[code.slice(0, 2)] || code} (${under.length} codes, one factor)`};
+  return {reason: `ambiguous: ${under.length} codes from ${Math.min(...vals).toFixed(3)} to ${Math.max(...vals).toFixed(3)}`};
+}
+
+function parse(text) {
+  const lines = text.trim().split(/\r?\n/).filter(l => l.trim());
+  if (/naics/i.test(lines[0] || "")) lines.shift();
+  return lines.map(l => {
+    const m = l.match(/^\s*([^,]*),\s*("[^"]*"|[^,]*)\s*(?:,(.*))?$/) || [];
+    return {code: (m[1] || "").trim(), spend: parseFloat((m[2] || "").replace(/["$,\s]/g, "")), label: (m[3] || "").trim().replace(/^"|"$/g, "")};
+  });
+}
+
+function run() {
+  const defl = parseFloat($("defl").value) || 1, margins = !$("nomargin").checked;
+  const rows = [], miss = [];
+  for (const l of parse($("input").value)) {
+    if (!isFinite(l.spend)) { miss.push({...l, spend: 0, reason: "spend is not a number"}); continue; }
+    const r = resolve(l.code, margins);
+    if (r.reason) miss.push({...l, reason: r.reason});
+    else rows.push({...l, ...r, kg: l.spend * defl * r.factor});
+  }
+  const total = rows.reduce((s, r) => s + r.kg, 0), spend = rows.reduce((s, r) => s + r.spend, 0);
+  const by = {};
+  rows.forEach(r => { const s = SECTORS[r.code.slice(0, 2)] || r.code.slice(0, 2); by[s] = (by[s] || 0) + r.kg; });
+  const max = Math.max(...rows.map(r => r.kg), 1);
+  let h = `<h2>Result</h2><div class="total" id="total">${fmt(total / 1000)} t CO2e</div>
+    <div class="sub">on $${fmt(spend, 0)} matched spend${spend ? ` · ${(total / spend).toFixed(3)} kg/USD` : ""}${defl === 1 ? " · spend treated as 2022 USD" : ""}</div>`;
+  h += `<h2>Hotspots</h2><div class="scroll"><table><tr><th>Line</th><th>NAICS</th><th class="n">kg/USD</th><th class="n">t CO2e</th><th class="n">Share</th><th style="width:22%"></th></tr>` +
+    rows.sort((a, b) => b.kg - a.kg).map(r => `<tr><td>${esc(r.label || r.title)}<div class="sub">${esc(r.title)}</div></td><td>${r.code}</td>
+      <td class="n">${r.factor.toFixed(3)}</td><td class="n">${fmt(r.kg / 1000)}</td><td class="n">${fmt(100 * r.kg / (total || 1))}%</td>
+      <td><div class="b" style="width:${100 * r.kg / max}%"></div></td></tr>`).join("") + `</table></div>`;
+  h += `<h2>By sector</h2><div class="scroll"><table>` + Object.entries(by).sort((a, b) => b[1] - a[1]).map(([s, kg]) =>
+    `<tr><td>${esc(s)}</td><td class="n">${fmt(kg / 1000)} t</td><td class="n">${fmt(100 * kg / (total || 1))}%</td></tr>`).join("") + `</table></div>`;
+  if (miss.length) h += `<h2 class="warn">Not estimated: ${miss.length} lines, $${fmt(miss.reduce((s, m) => s + m.spend, 0), 0)}</h2><div class="scroll"><table>` +
+    miss.map(m => `<tr><td>${esc(m.code)}</td><td>${esc(m.label)}</td><td class="n">$${fmt(m.spend, 0)}</td><td class="warn">${esc(m.reason)}</td></tr>`).join("") + `</table></div>`;
+  $("out").innerHTML = h;
+}
+
+function search() {
+  const q = $("q").value.trim().toLowerCase();
+  const hits = Object.entries(F).filter(([c, v]) => !q || c.startsWith(q) || v[0].toLowerCase().includes(q))
+    .sort((a, b) => b[1][1] - a[1][1]);
+  $("ft").innerHTML = `<tr><th>NAICS</th><th>Industry</th><th class="n">kg CO2e / USD</th></tr>` +
+    hits.slice(0, 40).map(([c, v]) => `<tr><td>${c}</td><td>${esc(v[0])}</td><td class="n">${v[1].toFixed(3)}</td></tr>`).join("") +
+    (hits.length > 40 ? `<tr><td></td><td class="sub">${hits.length - 40} more, narrow the search</td><td></td></tr>` : "");
+}
+
+$("input").value = EXAMPLE;
+["input", "defl", "nomargin"].forEach(id => $(id).addEventListener("input", run));
+$("q").addEventListener("input", search);
+run(); search();
+</script>
+</body>
+</html>
