@@ -1,0 +1,8 @@
+# Never commit anything that identifies or authenticates you.
+.env
+auth_state.json
+state/
+raw/
+__pycache__/
+*.pyc
+.venv/
