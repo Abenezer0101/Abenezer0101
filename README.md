@@ -21,7 +21,7 @@ I build things and then try hard to break them. Most of what I've learned came f
 ## 🛠️ Stack
 
 <p align="center">
-  <img src="https://raw.githubusercontent.com/Abenezer0101/Abenezer0101/main/assets/stack.svg"
+  <img src="https://raw.githubusercontent.com/Abenezer0101/Abenezer0101/main/assets/stack.svg?v=2"
        width="100%" alt="Python, JavaScript, HTML5, CSS3, SQL, Tableau, Git">
 </p>
 
