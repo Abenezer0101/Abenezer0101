@@ -18,6 +18,11 @@
 
 I build things and then try hard to break them. Most of what I've learned came from the bugs that got past the tests, so I check my work against something that disagrees with me: a reference implementation, a second language, or a real browser.
 
+<p align="center">
+  <img src="https://raw.githubusercontent.com/Abenezer0101/Abenezer0101/main/assets/panther.svg"
+       width="100%" alt="Georgia State University — a panther drawn as a constellation">
+</p>
+
 ## 🛠️ Stack
 
 <p align="center">
