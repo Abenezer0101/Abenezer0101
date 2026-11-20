@@ -1,0 +1,63 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="360" viewBox="0 0 1200 360" role="img" aria-labelledby="title desc">
+  <title id="title">Abenezer's automation console</title>
+  <desc id="desc">A stylized software automation dashboard showing data ingest, validation, and deployment steps online.</desc>
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#07111f"/>
+      <stop offset="100%" stop-color="#111827"/>
+    </linearGradient>
+    <linearGradient id="line" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#22d3ee"/>
+      <stop offset="100%" stop-color="#a78bfa"/>
+    </linearGradient>
+    <filter id="glow" x="-30%" y="-30%" width="160%" height="160%">
+      <feGaussianBlur stdDeviation="4" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <style>
+      .mono { font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace; }
+      .label { fill: #94a3b8; font-size: 13px; letter-spacing: 1.4px; }
+      .value { fill: #e2e8f0; font-size: 17px; font-weight: 700; }
+      .small { fill: #cbd5e1; font-size: 13px; }
+      .muted { fill: #64748b; font-size: 12px; }
+    </style>
+  </defs>
+
+  <rect width="1200" height="360" rx="22" fill="url(#bg)"/>
+  <rect x="1" y="1" width="1198" height="358" rx="21" fill="none" stroke="#263449"/>
+  <path d="M0 78H1200" stroke="#263449"/>
+  <circle cx="42" cy="39" r="7" fill="#fb7185"/>
+  <circle cx="66" cy="39" r="7" fill="#fbbf24"/>
+  <circle cx="90" cy="39" r="7" fill="#34d399"/>
+  <text x="120" y="45" class="mono label">ABENEZER / AUTOMATION-CONSOLE</text>
+  <rect x="936" y="24" width="225" height="31" rx="15.5" fill="#083344" stroke="#155e75"/>
+  <circle cx="959" cy="39.5" r="5" fill="#2dd4bf" filter="url(#glow)"/>
+  <text x="975" y="44" class="mono small" fill="#5eead4">SYSTEMS ONLINE</text>
+
+  <text x="42" y="115" class="mono label">CURRENT FOCUS</text>
+  <text x="42" y="145" class="mono value">DATA SYSTEMS · ANALYTICS · AUTOMATION</text>
+  <text x="42" y="173" class="mono small">Designing tools where results are traceable, testable, and useful.</text>
+
+  <rect x="42" y="210" width="324" height="98" rx="12" fill="#0b1728" stroke="#1e3a5f"/>
+  <circle cx="69" cy="239" r="7" fill="#22d3ee" filter="url(#glow)"/>
+  <text x="88" y="244" class="mono label">01 / INGEST</text>
+  <text x="69" y="281" class="mono value">RAW DATA → CLEAN SIGNAL</text>
+
+  <path d="M382 259H444" stroke="url(#line)" stroke-width="3"/>
+  <path d="M435 251l10 8-10 8" fill="none" stroke="#a78bfa" stroke-width="3"/>
+
+  <rect x="459" y="210" width="324" height="98" rx="12" fill="#0b1728" stroke="#334155"/>
+  <circle cx="486" cy="239" r="7" fill="#a78bfa" filter="url(#glow)"/>
+  <text x="505" y="244" class="mono label">02 / VALIDATE</text>
+  <text x="486" y="281" class="mono value">CHECKS → CONFIDENCE</text>
+
+  <path d="M799 259H861" stroke="url(#line)" stroke-width="3"/>
+  <path d="M852 251l10 8-10 8" fill="none" stroke="#22d3ee" stroke-width="3"/>
+
+  <rect x="876" y="210" width="282" height="98" rx="12" fill="#0b1728" stroke="#14532d"/>
+  <circle cx="903" cy="239" r="7" fill="#34d399" filter="url(#glow)"/>
+  <text x="922" y="244" class="mono label">03 / SHIP</text>
+  <text x="903" y="281" class="mono value">INSIGHT → IMPACT</text>
+
+  <text x="42" y="337" class="mono muted">STATUS: BUILDING SYSTEMS THAT EXPLAIN THEIR OUTPUTS</text>
+</svg>
